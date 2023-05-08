@@ -18,6 +18,7 @@ import { useColorScheme } from "react-native"
 import Config from "../config"
 import { useStores } from "../models" // @demo remove-current-line
 import {
+  FirstScreen, 
   LoginScreen, // @demo remove-current-line
   WelcomeScreen,
 } from "../screens"
@@ -39,6 +40,7 @@ import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
  */
 export type AppStackParamList = {
   Welcome: undefined
+  First: undefined
   Login: undefined // @demo remove-current-line
   Demo: NavigatorScreenParams<DemoTabParamList> // @demo remove-current-line
   // 🔥 Your screens go here
@@ -59,7 +61,6 @@ export type AppStackScreenProps<T extends keyof AppStackParamList> = StackScreen
 const Stack = createNativeStackNavigator<AppStackParamList>()
 
 const AppStack = observer(function AppStack() {
-  // @demo remove-block-start
   const {
     authenticationStore: { isAuthenticated },
   } = useStores()
@@ -68,22 +69,21 @@ const AppStack = observer(function AppStack() {
   return (
     <Stack.Navigator
       screenOptions={{ headerShown: false }}
-      initialRouteName={isAuthenticated ? "Welcome" : "Login"} // @demo remove-current-line
+      initialRouteName={isAuthenticated ? "Welcome" : "First"} 
     >
-      {/* @demo remove-block-start */}
+  
       {isAuthenticated ? (
         <>
-          {/* @demo remove-block-end */}
           <Stack.Screen name="Welcome" component={WelcomeScreen} />
-          {/* @demo remove-block-start */}
           <Stack.Screen name="Demo" component={DemoNavigator} />
         </>
       ) : (
         <>
+          <Stack.Screen name="First" component={FirstScreen} />
           <Stack.Screen name="Login" component={LoginScreen} />
         </>
       )}
-      {/* @demo remove-block-end */}
+
       {/** 🔥 Your screens go here */}
     </Stack.Navigator>
   )

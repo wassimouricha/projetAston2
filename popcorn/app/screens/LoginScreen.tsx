@@ -1,11 +1,12 @@
 import { observer } from "mobx-react-lite"
 import React, { FC, useEffect, useMemo, useRef, useState } from "react"
-import { TextInput, TextStyle, ViewStyle , Image, ImageStyle} from "react-native"
-import { Button, Icon, Screen, Text, TextField, TextFieldAccessoryProps } from "../components"
+import { TextInput, ViewStyle , Image, ImageStyle} from "react-native"
+import { Button, Icon, Screen, TextField, TextFieldAccessoryProps } from "../components"
 import { useStores } from "../models"
 import { AppStackScreenProps } from "../navigators"
 import { colors, spacing } from "../theme"
 import { isRTL } from "../i18n"
+
 
 interface LoginScreenProps extends AppStackScreenProps<"Login"> {}
 const logo = require("../../assets/images/logopop.png")
@@ -80,12 +81,8 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
       contentContainerStyle={$screenContentContainer}
       safeAreaEdges={["top", "bottom"]}
     >
-      {/* <Text testID="login-heading" tx="loginScreen.signIn" preset="heading" style={$signIn} /> */}
       <Image style={$signupLogo} source={logo} resizeMode="contain" />
-      <Text text="Bienvenue sur "   preset="subheading" style={$enterDetails} />
       <Image style={$popcornLogo} source={popcornlogo} resizeMode="contain" />
-      <Text text="Votre référence cinéma et séries"   preset="subheading" style={$enterDetails} />
-      {attemptsCount > 2 && <Text tx="loginScreen.hint" size="sm" weight="light" style={$hint} />}
 
       <TextField
         value={authEmail}
@@ -123,38 +120,21 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
         testID="login-button"
         text="Se connecter"
         style={$tapButton}
-        preset="reversed"
-        onPress={login}
-      />
-      <Button
-        testID="login-button"
-        text="S'inscire"
-        style={$tapButton}
+        textStyle={{color: colors.palette.secondary100, }}
         preset="reversed"
         onPress={login}
       />
 
-    <Text text="Continuer en tant que visiteur"   preset="subheading" style={$hint} />
+
     </Screen>
   )
 })
 
 const $screenContentContainer: ViewStyle = {
+  display:"flex",
+  alignContent:"center",
   paddingVertical: spacing.huge,
   paddingHorizontal: spacing.large,
-}
-
-const $signIn: TextStyle = {
-  marginBottom: spacing.small,
-}
-
-const $enterDetails: TextStyle = {
-  marginBottom: spacing.large,
-}
-
-const $hint: TextStyle = {
-  color: colors.tint,
-  marginBottom: spacing.medium,
 }
 
 const $textField: ViewStyle = {
