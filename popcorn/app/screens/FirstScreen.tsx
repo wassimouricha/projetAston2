@@ -12,11 +12,15 @@ const logo = require("../../assets/images/logopop.png")
 const popcornlogo = require("../../assets/images/popcornlogo.png")
 
 export const FirstScreen: FC<FirstScreenProps> = observer(function FirstScreen(_props) {
-  // const { navigation } = _props;
 
   function GoLogin() {
     console.log("LOGINPAGE")
     _props.navigation.navigate("Login")
+  }
+
+  function GoHome() {
+    console.log("HomePage")
+    _props.navigation.navigate("Guest")
   }
 
 
@@ -50,7 +54,7 @@ export const FirstScreen: FC<FirstScreenProps> = observer(function FirstScreen(_
         onPress={GoLogin}
       />
 
-    <Text text="Continuer en tant que visiteur"   preset="subheading" style={$hint} />
+    <Text text="Continuer en tant que visiteur"   onPress={GoHome}  preset="subheading" style={$hint} />
 
     </Screen>
   )

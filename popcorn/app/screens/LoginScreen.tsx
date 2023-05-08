@@ -1,11 +1,12 @@
 import { observer } from "mobx-react-lite"
 import React, { FC, useEffect, useMemo, useRef, useState } from "react"
-import { TextInput, ViewStyle , Image, ImageStyle} from "react-native"
+import { TextInput, ViewStyle , Image, ImageStyle, Pressable} from "react-native"
 import { Button, Icon, Screen, TextField, TextFieldAccessoryProps } from "../components"
 import { useStores } from "../models"
 import { AppStackScreenProps } from "../navigators"
 import { colors, spacing } from "../theme"
 import { isRTL } from "../i18n"
+import { TouchableHighlight } from "react-native-gesture-handler"
 
 
 interface LoginScreenProps extends AppStackScreenProps<"Login"> {}
@@ -75,13 +76,20 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
     }
   }, [])
 
+  function GoFirst() {
+    console.log("firstPAGE")
+    _props.navigation.navigate("First")
+  }
+
   return (
     <Screen
       preset="auto"
       contentContainerStyle={$screenContentContainer}
       safeAreaEdges={["top", "bottom"]}
     >
-      <Image style={$signupLogo} source={logo} resizeMode="contain" />
+      <Pressable onPress={GoFirst}>
+      <Image style={$signupLogo} source={logo} resizeMode="contain"  />
+      </Pressable>
       <Image style={$popcornLogo} source={popcornlogo} resizeMode="contain" />
 
       <TextField
