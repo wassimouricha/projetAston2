@@ -15,7 +15,7 @@ export const FirstScreen: FC<FirstScreenProps> = observer(function FirstScreen(_
   // const { navigation } = _props;
 
   function GoLogin() {
-    console.log("hihihihi")
+    console.log("developed by : wassim")
     _props.navigation.navigate("Login")
   }
 
