@@ -18,6 +18,11 @@ export const FirstScreen: FC<FirstScreenProps> = observer(function FirstScreen(_
     _props.navigation.navigate("Login")
   }
 
+  function GoRegister() {
+    console.log("REGISTERPAGE")
+    _props.navigation.navigate("Register")
+  }
+
   function GoHome() {
     console.log("HomePage")
     _props.navigation.navigate("Guest")
@@ -51,7 +56,7 @@ export const FirstScreen: FC<FirstScreenProps> = observer(function FirstScreen(_
         style={$tapButton}
         textStyle={{color: colors.palette.secondary100, }}
         preset="reversed"
-        onPress={GoLogin}
+        onPress={GoRegister}
       />
 
     <Text text="Continuer en tant que visiteur"   onPress={GoHome}  preset="subheading" style={$hint} />
