@@ -5,11 +5,13 @@ import {  Screen, Text  } from "../components"
 import { AppStackScreenProps } from "../navigators"
 import { colors, spacing } from "../theme"
 import { isRTL } from "../i18n"
+import  Gif  from 'react-native-gif';
 
 
 
 interface loadingSignInScreenProps extends AppStackScreenProps<"loadingSignInScreen"> {}
-const logo = require("../../assets/images/logopop.png")
+const popgif = require("../../assets/images/popgif.gif")
+const loadinggif = require("../../assets/images/loading.gif")
 const popcornlogo = require("../../assets/images/popcornlogo.png")
 
 export const loadingSignInScreen: FC<loadingSignInScreenProps> = observer(function LoadingSignInScreen(_props) {
@@ -19,7 +21,7 @@ export const loadingSignInScreen: FC<loadingSignInScreenProps> = observer(functi
     // Naviguer vers la page suivante
     console.log("LoginPage")
     _props.navigation.navigate("Login")
-  }, 2000); // 2000ms = 2 secondes
+  }, 3000); // 3000ms = 3 secondes
   }, [])
 
 
@@ -30,8 +32,11 @@ export const loadingSignInScreen: FC<loadingSignInScreenProps> = observer(functi
       contentContainerStyle={$screenContentContainer}
       safeAreaEdges={["top", "bottom"]}
     >
-        <Image style={$signupLogo} source={logo} resizeMode="contain"  />
-        <Text text="Chargement de la page d'inscription"   preset="subheading" style={$enterDetails} />
+      
+        <Gif source={popgif} style={{ width: '100%', height: 200 }} />
+        <Image style={$signupLogo} source={popcornlogo} resizeMode="contain"  />
+        <Gif source={loadinggif} style={{ width: '100%', height: 100 }} />
+        <Text text="Chargement de la page de connexion"   preset="subheading" style={$enterDetails} />
 
     </Screen>
   )
