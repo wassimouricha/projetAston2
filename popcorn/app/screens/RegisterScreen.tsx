@@ -160,6 +160,17 @@ export const RegisterScreen: FC<RegisterScreenProps> = observer(function Registe
         LeftAccessory={ EmailLeftAccessory }
       />
       
+      <TextField
+        containerStyle={$textField}
+        inputWrapperStyle={$ContainertextField}
+        label="Adresse"
+        autoCapitalize="none"
+        autoCorrect={false}
+        keyboardType="default"
+        placeholderTx="registerScreen.adresseFieldPlaceholder"
+        LeftAccessory={ EmailLeftAccessory }
+      />
+      
 
       <TextField
         ref={authPasswordInput}

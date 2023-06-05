@@ -14,8 +14,8 @@ const popcornlogo = require("../../assets/images/popcornlogo.png")
 export const FirstScreen: FC<FirstScreenProps> = observer(function FirstScreen(_props) {
 
   function GoLogin() {
-    console.log("LOGINPAGE")
-    _props.navigation.navigate("Login")
+    console.log("loadingSignInScreen")
+    _props.navigation.navigate("loadingSignInScreen")
   }
 
   function GoRegister() {

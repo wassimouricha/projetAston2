@@ -16,14 +16,14 @@ export const AuthenticationStoreModel = types
       return {
         authEmail: (function () {
           if (store.authEmail.length === 0) return "ne peut pas etre vide"
-          if (store.authEmail.length < 6) return "must be at least 6 characters"
+          if (store.authEmail.length < 6) return "l'adresse mail doit etre de 6 caractères minimum"
           if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(store.authEmail))
             return "must be a valid email address"
           return ""
         })(),
         authPassword: (function () {
           if (store.authPassword.length === 0) return "ne peut pas etre vide"
-          if (store.authPassword.length < 6) return "must be at least 6 characters"
+          if (store.authPassword.length < 6) return "le mot de passe doit etre de 6 caractères minimum"
           return ""
         })(),
         confirmAuthPassword: (function () {

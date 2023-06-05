@@ -46,6 +46,7 @@ const en = {
     pseudoFieldPlaceholder: "Entrez votre pseudo",
     adressFieldPlaceholder: "Entrez votre adresse",
     ageFieldPlaceholder: "Entrez votre age",
+    adresseFieldPlaceholder: "Entrez votre adresse",
     passwordFieldPlaceholder: "Entrez votre mot de passe",
     confirmPasswordFieldPlaceholder: "Confirmez votre mot de passe",  },
   demoNavigator: {

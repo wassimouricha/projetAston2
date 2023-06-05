@@ -9,6 +9,7 @@ import { isRTL } from "../i18n"
 
 
 
+
 interface LoginScreenProps extends AppStackScreenProps<"Login"> {}
 const logo = require("../../assets/images/logopop.png")
 const popcornlogo = require("../../assets/images/popcornlogo.png")
@@ -39,6 +40,7 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
   const errors: typeof validationErrors = isSubmitted ? validationErrors : ({} as any)
 
   function login() {
+
     setIsSubmitted(true)
     setAttemptsCount(attemptsCount + 1)
 
@@ -52,6 +54,7 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
 
     // pour l'instant c'est un fake token.
     setAuthToken(String(Date.now()))
+
   }
 
   // pour afficher mon icone droit de mot de passe

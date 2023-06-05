@@ -22,6 +22,7 @@ import {
   LoginScreen, 
   RegisterScreen,
   WelcomeScreen,
+  loadingSignInScreen,
 } from "../screens"
 import { DemoNavigator, DemoTabParamList } from "./DemoNavigator" // @demo remove-current-line
 import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
@@ -44,6 +45,7 @@ export type AppStackParamList = {
   First: undefined
   Login: undefined 
   Register: undefined 
+  loadingSignInScreen: undefined 
   Guest: undefined
   Demo: NavigatorScreenParams<DemoTabParamList> // @demo remove-current-line
   // 🔥 Your screens go here
@@ -85,6 +87,7 @@ const AppStack = observer(function AppStack() {
           <Stack.Screen name="First" component={FirstScreen} />
           <Stack.Screen name="Login" component={LoginScreen} />
           <Stack.Screen name="Register" component={RegisterScreen} />
+          <Stack.Screen name="loadingSignInScreen" component={loadingSignInScreen} />
           <Stack.Screen name="Guest" component={WelcomeScreen} />
           <Stack.Screen name="Demo" component={LoginScreen} />
         </>
