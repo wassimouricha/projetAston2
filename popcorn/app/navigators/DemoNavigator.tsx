@@ -13,7 +13,11 @@ import { AppStackParamList, AppStackScreenProps } from "./AppNavigator"
 export type DemoTabParamList = {
   DemoCommunity: undefined
   DemoShowroom: { queryIndex?: string; itemIndex?: string }
-  swipeMovies: undefined
+  SwipeMovies: undefined
+  Accueil: undefined
+  Profil: undefined
+  Favoris: undefined
+  Friends: undefined
   DemoDebug: undefined
   DemoPodcastList: undefined
 }
