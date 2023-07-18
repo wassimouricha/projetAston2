@@ -6,6 +6,9 @@ import {
   TouchableOpacityProps,
   View,
   ViewStyle,
+  ImageBackground,
+  ImageSourcePropType,
+  StyleSheet,
 } from "react-native"
 import { colors, spacing } from "../theme"
 import { Text, TextProps } from "./Text"
@@ -113,6 +116,11 @@ interface CardProps extends TouchableOpacityProps {
    * Overrides all other `footer*` props.
    */
   FooterComponent?: ReactElement
+
+   /**
+   * The background image to be displayed as the card's background.
+   */
+   backgroundImage?: ImageSourcePropType; 
 }
 
 /**
@@ -145,6 +153,7 @@ export function Card(props: CardProps) {
     ContentTextProps,
     HeadingTextProps,
     FooterTextProps,
+    backgroundImage,
     ...WrapperProps
   } = props
 
@@ -153,11 +162,17 @@ export function Card(props: CardProps) {
   const isHeadingPresent = !!(HeadingComponent || heading || headingTx)
   const isContentPresent = !!(ContentComponent || content || contentTx)
   const isFooterPresent = !!(FooterComponent || footer || footerTx)
+  
 
   const Wrapper: ComponentType<TouchableOpacityProps> = isPressable ? TouchableOpacity : View
   const HeaderContentWrapper = verticalAlignment === "force-footer-bottom" ? View : Fragment
 
-  const $containerStyle = [$containerPresets[preset], $containerStyleOverride]
+  const $containerStyle = [
+    $containerPresets[preset],
+    $containerBase, // Remove this line if you don't want the default container styles
+    backgroundImage && StyleSheet.absoluteFillObject, // Add this line to stretch the image over the entire card
+    $containerStyleOverride,
+  ];
   const $headingStyle = [
     $headingPresets[preset],
     (isFooterPresent || isContentPresent) && { marginBottom: spacing.micro },
@@ -191,6 +206,7 @@ export function Card(props: CardProps) {
       accessibilityRole={isPressable ? "button" : undefined}
       {...WrapperProps}
     >
+        {backgroundImage && <ImageBackground source={backgroundImage} style={[StyleSheet.absoluteFillObject, {borderRadius: spacing.medium } ]} />}
       {LeftComponent}
 
       <View style={$alignmentWrapperStyle}>
@@ -240,6 +256,8 @@ export function Card(props: CardProps) {
 }
 
 const $containerBase: ViewStyle = {
+  width: 350,
+  height: 250,
   borderRadius: spacing.medium,
   padding: spacing.extraSmall,
   borderWidth: 1,

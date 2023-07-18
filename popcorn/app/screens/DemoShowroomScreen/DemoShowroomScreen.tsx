@@ -13,7 +13,7 @@ import {
 } from "react-native"
 import { DrawerLayout, DrawerState } from "react-native-gesture-handler"
 import { useSharedValue, withTiming } from "react-native-reanimated"
-import { ListItem, Screen, Text } from "../../components"
+import { Card, ListItem, Screen, Text } from "../../components"
 import { isRTL } from "../../i18n"
 import { DemoTabParamList, DemoTabScreenProps } from "../../navigators/DemoNavigator"
 import { colors, spacing } from "../../theme"
@@ -22,6 +22,11 @@ import * as Demos from "./demos"
 import { DrawerIconButton } from "./DrawerIconButton"
 
 const logo = require("../../../assets/images/logo.png")
+const spidey = require("../../../assets/images/spiderman.jpg")
+const titreFilm =  "Le titre du film Complet"
+const genreFilm = "Genre"
+const anneeFilm = "Année"
+const dureeFilm = "Durée"
 
 export interface Demo {
   name: string
@@ -94,6 +99,7 @@ export const DemoShowroomScreen: FC<DemoTabScreenProps<"DemoShowroom">> =
     const progress = useSharedValue(0)
     const route = useRoute<RouteProp<DemoTabParamList, "DemoShowroom">>()
     const params = route.params
+    const loggedName = "Thierry"
 
     // handle Web links
     React.useEffect(() => {
@@ -210,7 +216,23 @@ export const DemoShowroomScreen: FC<DemoTabScreenProps<"DemoShowroom">> =
             renderSectionFooter={() => <View style={$demoUseCasesSpacer} />}
             ListHeaderComponent={
               <View style={$heading}>
-                <Text preset="heading" tx="demoShowroomScreen.jumpStart" />
+                   <Text preset="subheading" style={$heading}>
+              Salut{" "}
+              <Text preset="subheading" style={$loggedName}>
+                {loggedName}
+              </Text>
+              {" !  C'est quoi ton film aujourd'hui ?"}
+            </Text>
+            <Card
+        heading=""
+        content={`${titreFilm} `}
+        footer={`${genreFilm}                 ${anneeFilm}                  ${dureeFilm}`}
+        contentStyle={{color: colors.palette.red , alignItems: 'center', justifyContent: 'center'}}
+        footerStyle={{color: colors.palette.red , alignItems: 'center', justifyContent: 'space-between'}}
+        // backgroundImage={spidey}
+       
+      > 
+      </Card>
               </View>
             }
             onScrollToIndexFailed={scrollToIndexFailed}
@@ -279,4 +301,8 @@ const $demoUseCasesSpacer: ViewStyle = {
   paddingBottom: spacing.huge,
 }
 
-// @demo remove-file
+const $loggedName: TextStyle = {
+  color: colors.palette.red,
+}
+
+
