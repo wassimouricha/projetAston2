@@ -83,23 +83,14 @@ export function DemoNavigator() {
 
       <Tab.Screen
         name="Friends"
-        component={DemoPodcastListScreen}
-        options={{
-          tabBarLabel: translate("demoNavigator.friendsTab"),
-          tabBarIcon: ({ focused }) => <Icon icon="podcast" color={focused && colors.tint} />,
-        }}
-      />
-
-
-
-      <Tab.Screen
-        name="DemoDebug"
         component={DemoDebugScreen}
         options={{
-          tabBarLabel: translate("demoNavigator.debugTab"),
+          tabBarLabel: translate("demoNavigator.friendsTab"),
           tabBarIcon: ({ focused }) => <Icon icon="debug" color={focused && colors.tint} />,
         }}
       />
+
+
     </Tab.Navigator>
   )
 }
