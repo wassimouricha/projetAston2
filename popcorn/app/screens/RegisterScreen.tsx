@@ -9,13 +9,13 @@ import { isRTL } from "../i18n"
 
 
 
-
-interface LoginScreenProps extends AppStackScreenProps<"Login"> {}
+interface RegisterScreenProps extends AppStackScreenProps<"Register"> {}
 const logo = require("../../assets/images/logopop.png")
 const popcornlogo = require("../../assets/images/popcornlogo.png")
 
-export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_props) {
+export const RegisterScreen: FC<RegisterScreenProps> = observer(function RegisterScreen(_props) {
   const authPasswordInput = useRef<TextInput>()
+  const confirmAuthPasswordInput = useRef<TextInput>()
   const [isAuthPasswordHidden, setIsAuthPasswordHidden] = useState(true)
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [attemptsCount, setAttemptsCount] = useState(0)
@@ -23,24 +23,19 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
     authenticationStore: {
       authEmail,
       authPassword,
+      confirmAuthPassword,
       setAuthEmail,
       setAuthPassword,
+      setConfirmAuthPassword,
       setAuthToken,
       validationErrors,
     },
   } = useStores()
 
-  useEffect(() => {
-    // Here is where you could fetch credentials from keychain or storage
-    // ici je pré-remplis les inputs 
-    setAuthEmail("wassim.bouricha@popcorn.fr")
-    setAuthPassword("wassim")
-  }, [])
 
   const errors: typeof validationErrors = isSubmitted ? validationErrors : ({} as any)
 
-  function login() {
-
+  function Register() {
     setIsSubmitted(true)
     setAttemptsCount(attemptsCount + 1)
 
@@ -54,7 +49,6 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
 
     // pour l'instant c'est un fake token.
     setAuthToken(String(Date.now()))
-
   }
 
   // pour afficher mon icone droit de mot de passe
@@ -137,14 +131,46 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
         autoComplete="email"
         autoCorrect={false}
         keyboardType="email-address"
-        placeholderTx="loginScreen.emailFieldPlaceholder"
+        placeholderTx="registerScreen.emailFieldPlaceholder"
         LeftAccessory={ EmailLeftAccessory }
         helper={errors?.authEmail}
         status={errors?.authEmail ? "error" : undefined}
         onSubmitEditing={() => authPasswordInput.current?.focus()}
       />
       
+      <TextField
+        containerStyle={$textField}
+        inputWrapperStyle={$ContainertextField}
+        label="Pseudo"
+        autoCapitalize="none"
+        autoCorrect={false}
+        keyboardType="default"
+        placeholderTx="registerScreen.pseudoFieldPlaceholder"
+        LeftAccessory={ EmailLeftAccessory }
+      />
 
+      <TextField
+        containerStyle={$textField}
+        inputWrapperStyle={$ContainertextField}
+        label="Age"
+        autoCapitalize="none"
+        autoCorrect={false}
+        keyboardType="numeric"
+        placeholderTx="registerScreen.ageFieldPlaceholder"
+        LeftAccessory={ EmailLeftAccessory }
+      />
+      
+      <TextField
+        containerStyle={$textField}
+        inputWrapperStyle={$ContainertextField}
+        label="Adresse"
+        autoCapitalize="none"
+        autoCorrect={false}
+        keyboardType="default"
+        placeholderTx="registerScreen.adresseFieldPlaceholder"
+        LeftAccessory={ EmailLeftAccessory }
+      />
+      
 
       <TextField
         ref={authPasswordInput}
@@ -157,22 +183,40 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
         autoCorrect={false}
         secureTextEntry={isAuthPasswordHidden}
         label="Mot de passe"
-        placeholderTx="loginScreen.passwordFieldPlaceholder"
+        placeholderTx="registerScreen.passwordFieldPlaceholder"
         helper={errors?.authPassword}
         status={errors?.authPassword ? "error" : undefined}
-        onSubmitEditing={login}
+        onSubmitEditing={Register}
+        LeftAccessory={ PasswordLeftAccessory }
+        RightAccessory={PasswordRightAccessory}
+      />
+
+      <TextField
+        ref={confirmAuthPasswordInput}
+        value={confirmAuthPassword}
+        containerStyle={$textField}
+        onChangeText={setConfirmAuthPassword}
+        inputWrapperStyle={$ContainertextField}
+        autoCapitalize="none"
+        autoComplete="password"
+        autoCorrect={false}
+        secureTextEntry={isAuthPasswordHidden}
+        label="Confirmation"
+        placeholderTx="registerScreen.confirmPasswordFieldPlaceholder"
+        helper={errors?.confirmAuthPassword}
+        status={errors?.confirmAuthPassword ? "error" : undefined}
         LeftAccessory={ PasswordLeftAccessory }
         RightAccessory={PasswordRightAccessory}
       />
 
 
       <Button
-        testID="login-button"
-        text="Se connecter"
+        testID="register-button"
+        text="S'inscrire"
         style={$tapButton}
         textStyle={{color: colors.palette.secondary100, }}
         preset="reversed"
-        onPress={login}
+        onPress={Register}
       />
 
 

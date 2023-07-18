@@ -14,8 +14,13 @@ const popcornlogo = require("../../assets/images/popcornlogo.png")
 export const FirstScreen: FC<FirstScreenProps> = observer(function FirstScreen(_props) {
 
   function GoLogin() {
-    console.log("LOGINPAGE")
-    _props.navigation.navigate("Login")
+    console.log("loadingSignInScreen")
+    _props.navigation.navigate("loadingSignInScreen")
+  }
+
+  function GoRegister() {
+    console.log("REGISTERPAGE")
+    _props.navigation.navigate("Register")
   }
 
   function GoHome() {
@@ -51,7 +56,7 @@ export const FirstScreen: FC<FirstScreenProps> = observer(function FirstScreen(_
         style={$tapButton}
         textStyle={{color: colors.palette.secondary100, }}
         preset="reversed"
-        onPress={GoLogin}
+        onPress={GoRegister}
       />
 
     <Text text="Continuer en tant que visiteur"   onPress={GoHome}  preset="subheading" style={$hint} />
