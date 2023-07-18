@@ -86,6 +86,7 @@ export function Icon(props: IconProps) {
 
 export const iconRegistry = {
   back: require("../../assets/icons/back.png"),
+  home: require("../../assets/icons/home.png"),
   bell: require("../../assets/icons/bell.png"),
   caretLeft: require("../../assets/icons/caretLeft.png"),
   caretRight: require("../../assets/icons/caretRight.png"),
@@ -100,10 +101,14 @@ export const iconRegistry = {
   ladybug: require("../../assets/icons/ladybug.png"),
   lock: require("../../assets/icons/lock.png"),
   user: require("../../assets/icons/user.png"),
+  profil: require("../../assets/icons/profil.png"),
+  favoris: require("../../assets/icons/favoris.png"),
   menu: require("../../assets/icons/menu.png"),
   more: require("../../assets/icons/more.png"),
   pin: require("../../assets/icons/pin.png"),
   podcast: require("../../assets/icons/podcast.png"),
+  friends: require("../../assets/icons/friends.png"),
+  swipemovies: require("../../assets/icons/logo.png"),
   settings: require("../../assets/icons/settings.png"),
   slack: require("../../assets/icons/slack.png"),
   view: require("../../assets/icons/view.png"),
