@@ -50,7 +50,7 @@ export function DemoNavigator() {
         component={DemoShowroomScreen}
         options={{
           tabBarLabel: translate("demoNavigator.accueilTab"),
-          tabBarIcon: ({ focused }) => <Icon icon="components" color={focused && colors.tint} />,
+          tabBarIcon: ({ focused }) => <Icon icon="home" color={focused && colors.tint} />,
         }}
       />
 
@@ -59,7 +59,7 @@ export function DemoNavigator() {
         component={DemoCommunityScreen}
         options={{
           tabBarLabel: translate("demoNavigator.profilTab"),
-          tabBarIcon: ({ focused }) => <Icon icon="community" color={focused && colors.tint} />,
+          tabBarIcon: ({ focused }) => <Icon icon="profil" color={focused && colors.tint} />,
         }}
       />
 
@@ -68,7 +68,7 @@ export function DemoNavigator() {
         component={DemoPodcastListScreen}
         options={{
           tabBarLabel: translate("demoNavigator.swipeMoviesTab"),
-          tabBarIcon: ({ focused }) => <Icon icon="swipemovies" color={focused && colors.tint} />,
+          tabBarIcon: () => <Icon icon="swipemovies" />,
         }}
       />
 
@@ -77,7 +77,7 @@ export function DemoNavigator() {
         component={DemoPodcastListScreen}
         options={{
           tabBarLabel: translate("demoNavigator.favorisTab"),
-          tabBarIcon: ({ focused }) => <Icon icon="podcast" color={focused && colors.tint} />,
+          tabBarIcon: ({ focused }) => <Icon icon="favoris" color={focused && colors.tint} />,
         }}
       />
 
@@ -86,7 +86,7 @@ export function DemoNavigator() {
         component={DemoDebugScreen}
         options={{
           tabBarLabel: translate("demoNavigator.friendsTab"),
-          tabBarIcon: ({ focused }) => <Icon icon="debug" color={focused && colors.tint} />,
+          tabBarIcon: ({ focused }) => <Icon icon="friends" color={focused && colors.tint} />,
         }}
       />
 
