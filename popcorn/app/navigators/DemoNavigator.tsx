@@ -13,6 +13,7 @@ import { AppStackParamList, AppStackScreenProps } from "./AppNavigator"
 export type DemoTabParamList = {
   DemoCommunity: undefined
   DemoShowroom: { queryIndex?: string; itemIndex?: string }
+  swipeMovies: undefined
   DemoDebug: undefined
   DemoPodcastList: undefined
 }
@@ -45,31 +46,51 @@ export function DemoNavigator() {
       }}
     >
       <Tab.Screen
-        name="DemoShowroom"
+        name="Accueil"
         component={DemoShowroomScreen}
         options={{
-          tabBarLabel: translate("demoNavigator.componentsTab"),
+          tabBarLabel: translate("demoNavigator.accueilTab"),
           tabBarIcon: ({ focused }) => <Icon icon="components" color={focused && colors.tint} />,
         }}
       />
 
       <Tab.Screen
-        name="DemoCommunity"
+        name="Profil"
         component={DemoCommunityScreen}
         options={{
-          tabBarLabel: translate("demoNavigator.communityTab"),
+          tabBarLabel: translate("demoNavigator.profilTab"),
           tabBarIcon: ({ focused }) => <Icon icon="community" color={focused && colors.tint} />,
         }}
       />
 
       <Tab.Screen
-        name="DemoPodcastList"
+        name="SwipeMovies"
         component={DemoPodcastListScreen}
         options={{
-          tabBarLabel: translate("demoNavigator.podcastListTab"),
+          tabBarLabel: translate("demoNavigator.swipeMoviesTab"),
           tabBarIcon: ({ focused }) => <Icon icon="podcast" color={focused && colors.tint} />,
         }}
       />
+
+      <Tab.Screen
+        name="Favoris"
+        component={DemoPodcastListScreen}
+        options={{
+          tabBarLabel: translate("demoNavigator.favorisTab"),
+          tabBarIcon: ({ focused }) => <Icon icon="podcast" color={focused && colors.tint} />,
+        }}
+      />
+
+      <Tab.Screen
+        name="Friends"
+        component={DemoPodcastListScreen}
+        options={{
+          tabBarLabel: translate("demoNavigator.friendsTab"),
+          tabBarIcon: ({ focused }) => <Icon icon="podcast" color={focused && colors.tint} />,
+        }}
+      />
+
+
 
       <Tab.Screen
         name="DemoDebug"

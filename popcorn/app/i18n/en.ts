@@ -50,10 +50,12 @@ const en = {
     passwordFieldPlaceholder: "Entrez votre mot de passe",
     confirmPasswordFieldPlaceholder: "Confirmez votre mot de passe",  },
   demoNavigator: {
-    componentsTab: "Components",
+    accueilTab: "Accueil",
     debugTab: "Debug",
-    communityTab: "Community",
-    podcastListTab: "Podcast",
+    profilTab: "Profil",
+    favorisTab: "Favoris",
+    swipeMoviesTab: "Swipe Movies",
+    friendsTab: "Amis",
   },
   demoCommunityScreen: {
     title: "Connect with the community",
