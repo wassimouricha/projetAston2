@@ -1,6 +1,7 @@
 export * from "./WelcomeScreen"
 // @demo remove-block-start
 export * from "./FirstScreen"
+export * from "./HomePage"
 export * from "./LoginScreen"
 export * from "./RegisterScreen"
 export * from "./loadingSignInScreen"

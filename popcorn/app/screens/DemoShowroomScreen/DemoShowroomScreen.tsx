@@ -128,7 +128,6 @@ export const DemoShowroomScreen: FC<DemoTabScreenProps<"DemoShowroom">> =
   function DemoShowroomScreen(_props) {
 
     const listRef = useRef<SectionList>()
-
     const loggedName = "Thierry"
 
     // mon composant de carte film contenu dans le scrollview horizontal
@@ -258,46 +257,15 @@ const $screenContainer: ViewStyle = {
   flex: 1,
 }
 
-const $drawer: ViewStyle = {
-  flex: 1,
-}
-
-const $flatListContentContainer: ViewStyle = {
+const $screenContentContainer: ViewStyle = {
+  display:"flex",
+  alignContent:"center",
+  paddingVertical: spacing.huge,
   paddingHorizontal: spacing.large,
 }
 
 const $sectionListContentContainer: ViewStyle = {
   paddingHorizontal: spacing.large,
-}
-
-const $heading: ViewStyle = {
-  marginBottom: spacing.massive,
-
-}
-
-const $logoImage: ImageStyle = {
-  height: 42,
-  width: 77,
-}
-
-const $logoContainer: ViewStyle = {
-  alignSelf: "flex-start",
-  height: 56,
-  paddingHorizontal: spacing.large,
-}
-
-const $menuContainer: ViewStyle = {
-  paddingBottom: spacing.extraSmall,
-  paddingTop: spacing.large,
-}
-
-const $demoItemName: TextStyle = {
-  fontSize: 24,
-  marginBottom: spacing.medium,
-}
-
-const $demoItemDescription: TextStyle = {
-  marginBottom: spacing.huge,
 }
 
 const $demoUseCasesSpacer: ViewStyle = {
