@@ -10,6 +10,9 @@ import {
   TextStyle,
   View,
   ViewStyle,
+  ScrollView,
+  ImageBackground, 
+  StyleSheet,
 } from "react-native"
 import { DrawerLayout, DrawerState } from "react-native-gesture-handler"
 import { useSharedValue, withTiming } from "react-native-reanimated"
@@ -215,6 +218,7 @@ export const DemoShowroomScreen: FC<DemoTabScreenProps<"DemoShowroom">> =
             renderItem={({ item }) => item}
             renderSectionFooter={() => <View style={$demoUseCasesSpacer} />}
             ListHeaderComponent={
+
               <View style={$heading}>
                    <Text preset="subheading" style={$heading}>
               Salut{" "}
@@ -223,7 +227,7 @@ export const DemoShowroomScreen: FC<DemoTabScreenProps<"DemoShowroom">> =
               </Text>
               {" !  C'est quoi ton film aujourd'hui ?"}
             </Text>
-            <Card
+            {/* <Card
         heading=""
         content={`${titreFilm} `}
         footer={`${genreFilm}                 ${anneeFilm}                  ${dureeFilm}`}
@@ -232,7 +236,41 @@ export const DemoShowroomScreen: FC<DemoTabScreenProps<"DemoShowroom">> =
         // backgroundImage={spidey}
        
       > 
-      </Card>
+      </Card> */}
+
+                    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                      <Text preset="subheading" >Sortie de la semaine</Text>
+                    </View>
+
+      <View style={{ flex: 1, borderRadius: 30, overflow: 'hidden' ,  marginTop: 20}}>
+      <ImageBackground source={spidey} style={{ flex: 1, }}>
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+          <ScrollView scrollEventThrottle={16}>
+            <View style={{  paddingTop: 40 }}>
+              <View style={{ height: 200 }}>
+                <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                  <View style={{flex:2,   width: 330 , flexDirection: 'column-reverse' }}>
+                  <View style={{   flexDirection:'row' , justifyContent: 'space-between'}}>
+                  <Text preset="subheading" style={{color: colors.palette.neutral100 ,}}>Genre</Text>
+                  <Text preset="subheading" style={{color: colors.palette.neutral100 ,}}>Année</Text>
+                  <Text preset="subheading" style={{color: colors.palette.neutral100 ,}}>Durée</Text>
+                  </View>
+                  <Text preset="subheading" style={{color: colors.palette.neutral100 , alignItems:'center'}}>Titre du film complet</Text>
+                  </View>
+                </ScrollView>
+              </View>
+            </View>
+          </ScrollView>
+        </View>
+      </ImageBackground>
+    </View>
+
+    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                      <Text preset="subheading" >Série à la une </Text>
+                    </View>
+    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                      <Text preset="subheading" >Vous aimerez peut-être </Text>
+                    </View>
               </View>
             }
             onScrollToIndexFailed={scrollToIndexFailed}
@@ -270,6 +308,7 @@ const $sectionListContentContainer: ViewStyle = {
 
 const $heading: ViewStyle = {
   marginBottom: spacing.massive,
+
 }
 
 const $logoImage: ImageStyle = {
