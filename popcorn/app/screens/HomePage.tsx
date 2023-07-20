@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite"
 import React, { FC,} from "react"
-import { TextStyle, ViewStyle , Image, ImageStyle, ImageBackground, View, ScrollView, TextInput, Touchable, TouchableOpacity, Alert} from "react-native"
+import { TextStyle, ViewStyle , Image, ImageStyle, ImageBackground, View, ScrollView, TextInput, Touchable, TouchableOpacity, Alert, ImageSourcePropType} from "react-native"
 import {  Button, Screen, Text, } from "../components"
 import { colors, spacing } from "../theme"
 import { isRTL } from "../i18n"
@@ -13,28 +13,28 @@ const popcornlogo = require("../../assets/images/popcornlogo.png")
 const thierry = require("../../assets/images/thierry.jpg")
 const films = [
   {
-    affiche: require("../../assets/images/spiderman.jpg"),
+    affiche: require("../../assets/images/spiderman.jpg") as ImageSourcePropType ,
     genre: "Action",
     annee: "2023",
     duree: "2h30min",
     titre: "Spider-Man: Across the spider-verse",
   },
   {
-    affiche: require("../../assets/images/gardian.jpg"),
+    affiche: require("../../assets/images/gardian.jpg") as ImageSourcePropType,
     genre: "Action",
     annee: "2023",
     duree: "2h30min",
     titre: "Gardiens de la galaxie 3",
   },
   {
-    affiche: require("../../assets/images/wick.jpg"),
+    affiche: require("../../assets/images/wick.jpg") as ImageSourcePropType,
     genre: "Action",
     annee: "2023",
     duree: "2h49min",
     titre: "John Wick - Chapitre 4",
   },
   {
-    affiche: require("../../assets/images/fraise.jpg"),
+    affiche: require("../../assets/images/fraise.jpg") as ImageSourcePropType,
     genre: "Drame",
     annee: "2023",
     duree: "1H39min",
@@ -43,28 +43,28 @@ const films = [
 ]
 const series = [
   {
-    affiche: require("../../assets/images/lastof.jpeg"),
+    affiche: require("../../assets/images/lastof.jpeg") as ImageSourcePropType,
     genre: "Drame",
     annee: "2023",
     duree: "1 saison",
     titre: "The Last of us",
   },
   {
-    affiche: require("../../assets/images/boys.jpg"),
+    affiche: require("../../assets/images/boys.jpg") as ImageSourcePropType,
     genre: "Action",
     annee: "2019",
     duree: "3 saisons",
     titre: "The Boys",
   },
   {
-    affiche: require("../../assets/images/mando.jpg"),
+    affiche: require("../../assets/images/mando.jpg") as ImageSourcePropType,
     genre: "Space western",
     annee: "2019",
     duree: "3 saisons",
     titre: "The Mandalorian",
   },
   {
-    affiche: require("../../assets/images/bear.jpg"),
+    affiche: require("../../assets/images/bear.jpg") as ImageSourcePropType,
     genre: "Comédie dramatique",
     annee: "2022",
     duree: "1 saison",
@@ -73,27 +73,27 @@ const series = [
 ]
 const FilmMayLike = [
   {
-    affiche: require("../../assets/images/matrix.jpg"),
+    affiche: require("../../assets/images/matrix.jpg") as ImageSourcePropType,
     genre: "SF",
     duree: "2h 15min",
     titre: "Matrix",
   },
   {
-    affiche: require("../../assets/images/nope.jpg"),
+    affiche: require("../../assets/images/nope.jpg") as ImageSourcePropType,
     genre: "Horreur",
     annee: "2022",
     duree: "2h 10min",
     titre: "Nope",
   },
   {
-    affiche: require("../../assets/images/prey.jpeg"),
+    affiche: require("../../assets/images/prey.jpeg") as ImageSourcePropType,
     genre: "Action/SF",
     annee: "2019",
     duree: "1h 40min",
     titre: "Prey",
   },
   {
-    affiche: require("../../assets/images/kimi.jpg"),
+    affiche: require("../../assets/images/kimi.jpg") as ImageSourcePropType,
     genre: "Comédie dramatique",
     annee: "2022",
     duree: "1h 29min",
@@ -111,10 +111,15 @@ export const HomePage: FC<HomePageProps> = observer(function HomePage(_props) {
     Alert.alert('Film sélectionné', `Vous avez sélectionné le film : ${filmTitre} sortie en  : ${anneeTitre}`);
   };
   
+    // Attention pour l'instant cela ne fonctionne que lorsque l'on est non connecté
+    function GoCardDetail(titre: string, annee: string , affiche: ImageSourcePropType) {
+      console.log("CardDetail");
+      _props.navigation.navigate("DetailScreen", { titre, annee , affiche}); // Passer les paramètres ici
+    }
 
   // mon composant de carte film contenu dans le scrollview horizontal
   const FilmItem = ({ affiche, genre, annee, duree, titre }) => (
-    <TouchableOpacity onPress={() => GoCardDetail(  titre, annee )}>
+    <TouchableOpacity onPress={() => GoCardDetail(  titre, annee, affiche )}>
     <View style={{ flex: 1, borderRadius: 30, overflow: 'hidden', marginTop: 20, marginHorizontal: 10 }}>
       <ImageBackground source={affiche} style={{ flex: 1 }}>
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -156,11 +161,7 @@ export const HomePage: FC<HomePageProps> = observer(function HomePage(_props) {
       </ImageBackground>
     </View>
   );
-  // Attention pour l'instant cela ne fonctionne que lorsque l'on est non connecté
-  function GoCardDetail(titre: string, annee: string) {
-    console.log("CardDetail");
-    _props.navigation.navigate("DetailScreen", { titre, annee }); // Passer les paramètres ici
-  }
+
 
   return (
     <Screen
@@ -200,7 +201,7 @@ export const HomePage: FC<HomePageProps> = observer(function HomePage(_props) {
                       <Text preset="subheading" >Sortie de la semaine</Text>
                     </View>
                     <View>
-                      
+
                     </View>
                       {/* Composant de scrolling horizontal contenant mes cartes des sorties de la semaine */}
                     <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>

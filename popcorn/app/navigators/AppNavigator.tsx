@@ -14,7 +14,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import { StackScreenProps } from "@react-navigation/stack"
 import { observer } from "mobx-react-lite"
 import React from "react"
-import { useColorScheme } from "react-native"
+import { ImageSourcePropType, useColorScheme } from "react-native"
 import Config from "../config"
 import { useStores } from "../models" // @demo remove-current-line
 import {
@@ -49,7 +49,7 @@ export type AppStackParamList = {
   First: undefined
   Home: undefined
   Login: undefined 
-  DetailScreen: { titre: string; annee: string }; // Ajoutez les paramètres ici
+  DetailScreen: { titre?: string; annee?: string , affiche?: ImageSourcePropType}; // Ajoutez les paramètres ici
   Register: undefined 
   loadingSignInScreen: undefined 
   Guest: undefined

@@ -1,11 +1,14 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, ViewStyle, Image, ImageSourcePropType } from 'react-native';
+
 
 const CardDetailScreen = ({ route }) => {
-  const { titre, annee } = route.params;
+  const { titre, annee , affiche} = route.params;
 
   return (
-    <View>
+    
+    <View style={$screenContentContainer}>
+      <Image source={affiche} style={{ width: 100, height: 100 }} />
       <Text>Film Detail Screen</Text>
       <Text>Title: {titre}</Text>
       <Text>Year: {annee}</Text>
@@ -15,3 +18,9 @@ const CardDetailScreen = ({ route }) => {
 };
 
 export default CardDetailScreen;
+
+const $screenContentContainer: ViewStyle = {
+  display:"flex",
+  alignContent:"center",
+
+}
