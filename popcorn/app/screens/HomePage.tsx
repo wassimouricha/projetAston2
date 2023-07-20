@@ -1,10 +1,11 @@
 import { observer } from "mobx-react-lite"
 import React, { FC,} from "react"
-import { TextStyle, ViewStyle , Image, ImageStyle, ImageBackground, View, ScrollView, TextInput} from "react-native"
+import { TextStyle, ViewStyle , Image, ImageStyle, ImageBackground, View, ScrollView, TextInput, Touchable, TouchableOpacity, Alert} from "react-native"
 import {  Screen, Text, } from "../components"
 import { colors, spacing } from "../theme"
 import { isRTL } from "../i18n"
 import { AppStackScreenProps } from "../navigators/AppNavigator"
+import { handleFilmItemClick } from "./homePageComponent/cardOpened"
 
 
 interface HomePageProps  extends AppStackScreenProps<"Home"> {}
@@ -108,6 +109,7 @@ export const HomePage: FC<HomePageProps> = observer(function HomePage(_props) {
 
   // mon composant de carte film contenu dans le scrollview horizontal
   const FilmItem = ({ affiche, genre, annee, duree, titre }) => (
+    <TouchableOpacity onPress={() => handleFilmItemClick(titre , annee)}>
     <View style={{ flex: 1, borderRadius: 30, overflow: 'hidden', marginTop: 20, marginHorizontal: 10 }}>
       <ImageBackground source={affiche} style={{ flex: 1 }}>
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -126,6 +128,7 @@ export const HomePage: FC<HomePageProps> = observer(function HomePage(_props) {
         </View>
       </ImageBackground>
     </View>
+    </TouchableOpacity>
   );
   
   // mon deuxieme composant de carte film contenu dans le scrollview horizontal mais différent
