@@ -27,6 +27,8 @@ import {
 } from "../screens"
 import { DemoNavigator, DemoTabParamList } from "./DemoNavigator" // @demo remove-current-line
 import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
+import CardDetailScreen from "../screens/homePageComponent/CardDetailScreen"
+
 
 
 /**
@@ -47,6 +49,7 @@ export type AppStackParamList = {
   First: undefined
   Home: undefined
   Login: undefined 
+  DetailScreen: { titre: string; annee: string }; // Ajoutez les paramètres ici
   Register: undefined 
   loadingSignInScreen: undefined 
   Guest: undefined
@@ -91,6 +94,7 @@ const AppStack = observer(function AppStack() {
           <Stack.Screen name="Home" component={HomePage} />
           <Stack.Screen name="Login" component={LoginScreen}  />
           <Stack.Screen name="Register" component={RegisterScreen} />
+          <Stack.Screen name="DetailScreen" component={CardDetailScreen} />
           <Stack.Screen name="loadingSignInScreen" component={loadingSignInScreen} />
           <Stack.Screen name="Guest" component={WelcomeScreen} />
           <Stack.Screen name="Demo" component={LoginScreen} />

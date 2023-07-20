@@ -25,7 +25,7 @@ export const FirstScreen: FC<FirstScreenProps> = observer(function FirstScreen(_
 
   function GoHome() {
     console.log("HomePage")
-    _props.navigation.navigate("Guest")
+    _props.navigation.navigate("Home")
   }
 
 

@@ -1,13 +1,13 @@
 import { observer } from "mobx-react-lite"
 import React, { FC,} from "react"
 import { TextStyle, ViewStyle , Image, ImageStyle, ImageBackground, View, ScrollView, TextInput, Touchable, TouchableOpacity, Alert} from "react-native"
-import {  Screen, Text, } from "../components"
+import {  Button, Screen, Text, } from "../components"
 import { colors, spacing } from "../theme"
 import { isRTL } from "../i18n"
 import { AppStackScreenProps } from "../navigators/AppNavigator"
+import { StackNavigationProp } from "@react-navigation/stack";
 
-
-interface HomePageProps  extends AppStackScreenProps<"Home"> {}
+interface HomePageProps  extends AppStackScreenProps<"Home"> {titre?: string; annee?: string;}
 const logo = require("../../assets/images/logopop.png")
 const popcornlogo = require("../../assets/images/popcornlogo.png")
 const thierry = require("../../assets/images/thierry.jpg")
@@ -114,7 +114,7 @@ export const HomePage: FC<HomePageProps> = observer(function HomePage(_props) {
 
   // mon composant de carte film contenu dans le scrollview horizontal
   const FilmItem = ({ affiche, genre, annee, duree, titre }) => (
-    <TouchableOpacity onPress={() => handleFilmItemClick(titre , annee)}>
+    <TouchableOpacity onPress={() => GoCardDetail(  titre, annee )}>
     <View style={{ flex: 1, borderRadius: 30, overflow: 'hidden', marginTop: 20, marginHorizontal: 10 }}>
       <ImageBackground source={affiche} style={{ flex: 1 }}>
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -156,7 +156,11 @@ export const HomePage: FC<HomePageProps> = observer(function HomePage(_props) {
       </ImageBackground>
     </View>
   );
-  
+  // Attention pour l'instant cela ne fonctionne que lorsque l'on est non connecté
+  function GoCardDetail(titre: string, annee: string) {
+    console.log("CardDetail");
+    _props.navigation.navigate("DetailScreen", { titre, annee }); // Passer les paramètres ici
+  }
 
   return (
     <Screen
@@ -194,6 +198,9 @@ export const HomePage: FC<HomePageProps> = observer(function HomePage(_props) {
 
                     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
                       <Text preset="subheading" >Sortie de la semaine</Text>
+                    </View>
+                    <View>
+                      
                     </View>
                       {/* Composant de scrolling horizontal contenant mes cartes des sorties de la semaine */}
                     <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
