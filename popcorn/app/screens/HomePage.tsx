@@ -5,7 +5,6 @@ import {  Screen, Text, } from "../components"
 import { colors, spacing } from "../theme"
 import { isRTL } from "../i18n"
 import { AppStackScreenProps } from "../navigators/AppNavigator"
-import { handleFilmItemClick } from "./homePageComponent/cardOpened"
 
 
 interface HomePageProps  extends AppStackScreenProps<"Home"> {}
@@ -106,6 +105,12 @@ const FilmMayLike = [
 export const HomePage: FC<HomePageProps> = observer(function HomePage(_props) {
 
   const loggedName = "Thierry"
+  const handleFilmItemClick = (filmTitre , anneeTitre) => {
+    // Ici, vous pouvez implémenter l'action à effectuer lorsqu'un FilmItem est cliqué.
+    // Par exemple, afficher une alerte avec le titre du film.
+    Alert.alert('Film sélectionné', `Vous avez sélectionné le film : ${filmTitre} sortie en  : ${anneeTitre}`);
+  };
+  
 
   // mon composant de carte film contenu dans le scrollview horizontal
   const FilmItem = ({ affiche, genre, annee, duree, titre }) => (

@@ -89,7 +89,7 @@ const AppStack = observer(function AppStack() {
         <>
           <Stack.Screen name="First" component={FirstScreen} />
           <Stack.Screen name="Home" component={HomePage} />
-          <Stack.Screen name="Login" component={LoginScreen} />
+          <Stack.Screen name="Login" component={LoginScreen}  />
           <Stack.Screen name="Register" component={RegisterScreen} />
           <Stack.Screen name="loadingSignInScreen" component={loadingSignInScreen} />
           <Stack.Screen name="Guest" component={WelcomeScreen} />
