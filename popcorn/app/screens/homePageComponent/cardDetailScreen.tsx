@@ -1,11 +1,14 @@
 import React from 'react';
-import { View, Text, ViewStyle, Image, ImageSourcePropType, ImageBackground, TouchableOpacity } from 'react-native';
+import { View, ViewStyle, Image, ImageSourcePropType, ImageBackground, TouchableOpacity } from 'react-native';
+import { Text } from '../../components';
 import { colors } from '../../theme';
 
 const CardDetailScreen = ({ route }) => {
   const { titre, annee, affiche } = route.params;
   const backArrrow = require("../../../assets/icons/backarrow.png")
   const heart = require("../../../assets/icons/blackheart.png")
+  const popcorn = require("../../../assets/images/popcorn.png")
+  const bookmark = require("../../../assets/images/bookmarks.png")
   return (
     <View style={$screenContentContainer}>
       <ImageBackground
@@ -30,14 +33,15 @@ const CardDetailScreen = ({ route }) => {
 
       </ImageBackground>
       <View style={ $smallContentContainer}>
-        <Text>Film</Text>
+        <Text preset="bold" style={{color: colors.palette.red , fontSize:18}}>Film</Text>
         <View style={$titleContainer}>
         <Text> {titre}</Text>
-        <Text>Logo</Text>
+        <Image source={popcorn} style={{ height:30 , width:30}}/>
         </View>
         <View style={$titleContainer}>
         <Text>Genre : {titre}</Text>
         <Text>Durée : </Text>
+        <Image source={bookmark} style={{ height:30 , width:30 , tintColor:colors.palette.red}}/>
         </View>
 
       </View>
