@@ -19,6 +19,7 @@ const palette = {
   primary600: "#A54F31",
   red: "#D70303",
   gray: "#D9D9D9",
+  green: "#00D387",
 
   secondary100: "#DCDDE9",
   secondary200: "#BCC0D6",

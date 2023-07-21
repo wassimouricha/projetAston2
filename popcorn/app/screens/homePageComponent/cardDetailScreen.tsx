@@ -1,15 +1,31 @@
 import React from 'react';
-import { View, Text, ViewStyle, Image, ImageSourcePropType, ImageBackground } from 'react-native';
+import { View, Text, ViewStyle, Image, ImageSourcePropType, ImageBackground, TouchableOpacity } from 'react-native';
+import { colors } from '../../theme';
 
 const CardDetailScreen = ({ route }) => {
   const { titre, annee, affiche } = route.params;
-
+  const backArrrow = require("../../../assets/icons/backarrow.png")
+  const heart = require("../../../assets/icons/blackheart.png")
   return (
     <View style={$screenContentContainer}>
       <ImageBackground
         source={affiche}
         style={{ height: 450, alignItems: 'center' }}
       >
+        <View style={ $buttonContainer}>
+        <TouchableOpacity style={$returnButton} >
+          <Image source={backArrrow}  style={{ height: 25, width:25, marginTop:12 , marginRight:5 , alignItems:'center'}}></Image>
+        </TouchableOpacity>
+        <TouchableOpacity style={$LikeButton} >
+          <Image source={heart}  style={{ height: 35, width:35, marginTop:5 , alignItems:'center' , tintColor:colors.palette.green}}></Image>
+        </TouchableOpacity>
+        </View>
+        <View style={ $buttonContainerOnlyRight}>
+        <TouchableOpacity style={$DisLikeButton} >
+          <Image source={backArrrow}  style={{ height: 25, width:25, marginTop:12 , marginRight:5 , alignItems:'center'}}></Image>
+        </TouchableOpacity>
+        </View>
+
         <View style={$bottomOverlay} />
 
       </ImageBackground>
@@ -44,8 +60,63 @@ const $smallContentContainer: ViewStyle = {
 const $titleContainer: ViewStyle = {
   display: "flex",
   flexDirection: 'row',
-  justifyContent:'space-between'
+  justifyContent:'space-between',
+
 }
+
+const $buttonContainer: ViewStyle = {
+  width: '100%',
+  display: "flex",
+  flexDirection: 'row',
+  justifyContent:'space-between',
+  paddingHorizontal: 20,
+}
+const $buttonContainerOnlyRight: ViewStyle = {
+  width: '100%',
+  display: "flex",
+  flexDirection: 'row-reverse',
+  justifyContent:'space-between',
+  paddingHorizontal: 20,
+  marginTop:30
+}
+
+
+const $returnButton: ViewStyle = {
+  top: 40,
+  borderWidth:1,
+  borderColor:'rgba(0,0,0,0.2)',
+  alignItems:'center',
+  justifyContent:'flex-start',
+  width:50,
+  height:50,
+  backgroundColor: colors.palette.red,
+  borderRadius:50,
+}
+
+const $LikeButton: ViewStyle = {
+  top: 40,
+  borderWidth:2.5,
+  borderColor:colors.palette.green,
+  alignItems:'center',
+  justifyContent:'flex-start',
+  width:50,
+  height:50,
+  backgroundColor: 'rgba(0, 0, 0, 0.1)',
+  borderRadius:50,
+}
+
+const $DisLikeButton: ViewStyle = {
+  top: 40,
+  borderWidth:2.5,
+  borderColor:colors.palette.red,
+  alignItems:'center',
+  justifyContent:'flex-start',
+  width:50,
+  height:50,
+  backgroundColor: 'rgba(0, 0, 0, 0.1)',
+  borderRadius:50,
+}
+
 
 
 
