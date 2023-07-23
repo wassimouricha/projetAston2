@@ -3,9 +3,9 @@ import { View, ViewStyle, Image, ImageBackground, TouchableOpacity , ImageSource
 import { Text } from '../../components';
 import { colors } from '../../theme';
 import { ScrollView } from 'react-native-gesture-handler';
-import { color } from 'react-native-reanimated';
 
-const CardDetailScreen = ({ route }) => {
+
+const CardDetailScreen = ({ route , navigation}) => {  {/*En ajoutant navigation aux props de la composante, on peut maintenant utiliser navigation.goBack()*/}
   const { titre, annee, affiche , duree , genre ,synopsis, realisateur, distributions } = route.params;
   const backArrrow = require("../../../assets/icons/backarrow.png")
   const heart = require("../../../assets/icons/blackheart.png")
@@ -19,7 +19,7 @@ const CardDetailScreen = ({ route }) => {
         style={{ height: 450, alignItems: 'center' }}
       >
         <View style={ $buttonContainer}>
-        <TouchableOpacity style={$returnButton} >
+        <TouchableOpacity style={$returnButton}  onPress={() => navigation.goBack()}>{/* Utiliser onPress pour revenir à l'écran précédent */}
           <Image source={backArrrow}  style={{ height: 25, width:25, marginTop:12 , marginRight:5 , alignItems:'center'}}></Image>
         </TouchableOpacity>
         <TouchableOpacity style={$LikeButton} >
