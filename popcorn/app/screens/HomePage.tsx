@@ -126,6 +126,7 @@ export const HomePage: FC<HomePageProps> = observer(function HomePage(_props) {
                         synopsis={film.synopsis}
                         realisateur={film.realisateur}
                         distributions={film.distributions}
+                        onPress={() => GoCardDetail(film.titre, film.annee,film.duree, film.genre ,film.affiche , film.synopsis , film.realisateur , film.distributions)}
                       />
                     ))}
                   </ScrollView>

@@ -3,6 +3,7 @@ import { View, ViewStyle, Image, ImageBackground, TouchableOpacity , ImageSource
 import { Text } from '../../components';
 import { colors } from '../../theme';
 import { ScrollView } from 'react-native-gesture-handler';
+import { color } from 'react-native-reanimated';
 
 const CardDetailScreen = ({ route }) => {
   const { titre, annee, affiche , duree , genre ,synopsis, realisateur, distributions } = route.params;
@@ -37,25 +38,28 @@ const CardDetailScreen = ({ route }) => {
       <View style={ $smallContentContainer}>
         <Text preset="bold" style={{color: colors.palette.red , fontSize:18}}>Film</Text>
         <View style={$titleContainer}>
-        <Text> {titre}</Text>
+        <Text preset="bold" style={{ fontSize:18 }}> {titre}</Text>
         <Image source={popcorn} style={{ height:30 , width:30}}/>
         </View>
         <View style={$titleContainer}>
-        <Text>Genre : {genre}</Text>
-        <Text>Durée : {duree}</Text>
+        <Text style={{ color:colors.palette.darkGray}}>Genre : {genre}</Text>
+        <Text style={{ color:colors.palette.darkGray}}>Durée : {duree}</Text>
         <Image source={bookmark} style={{ height:30 , width:30 , tintColor:colors.palette.red}}/>
         </View>
         <View style={$titleContainer}>
-        <Text>Synopsis : {synopsis}</Text>
+        <Text preset="bold" style={{ fontSize:18}}>Synopsis : </Text>
         </View>
         <View style={$titleContainer}>
-        <Text>Réalisateur : {realisateur}</Text>
+        <Text style={{ color:colors.palette.darkGray}}>{synopsis}</Text>
         </View>
         <View style={$titleContainer}>
-        <Text>Distribution : {distributions}</Text>
+        <Text style={{ color:colors.palette.darkGray , marginTop:15}}>Réalisateur : {realisateur}</Text>
         </View>
         <View style={$titleContainer}>
-        <Text>Année : {annee}</Text>
+        <Text style={{ color:colors.palette.darkGray , marginTop:20}}>Distribution : {distributions}</Text>
+        </View>
+        <View style={$titleContainer}>
+        <Text style={{ color:colors.palette.darkGray , marginTop:20}}>Année : {annee}</Text>
         </View>
 
       </View>

@@ -68,15 +68,38 @@ export const FilmItem: React.FC<FilmItemProps> = ({
 interface FilmMayLikeItemProps {
   affiche: ImageSourcePropType;
   genre: string;
-  duree: string;
-  titre: string;
+  annee: string;
   synopsis: string;
   realisateur: string;
   distributions: string;
+  duree: string;
+  titre: string;
+  onPress: () => void;
+
 }
 
 
-export const FilmMayLikeItem: React.FC<FilmMayLikeItemProps> = ({ affiche, genre, duree, titre }) => (
+export const FilmMayLikeItem: React.FC<FilmMayLikeItemProps> = ({ 
+  affiche,
+  genre,
+  annee,
+  duree,
+  titre,
+  synopsis,
+  realisateur,
+  distributions,
+  onPress,
+}) => (
+  <TouchableOpacity onPress={onPress}>
+  <View
+    style={{
+      flex: 1,
+      borderRadius: 30,
+      overflow: "hidden",
+      marginTop: 20,
+      marginHorizontal: 10,
+    }}
+  >
   <View style={{ flex: 1, borderRadius: 30, overflow: "hidden", marginTop: 20, marginHorizontal: 10, width: 150 }}>
     <ImageBackground source={affiche} style={{ flex: 1 }}>
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
@@ -100,4 +123,6 @@ export const FilmMayLikeItem: React.FC<FilmMayLikeItemProps> = ({ affiche, genre
       </View>
     </ImageBackground>
   </View>
+  </View>
+  </TouchableOpacity>
 );
