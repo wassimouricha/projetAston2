@@ -24,9 +24,9 @@ export const HomePage: FC<HomePageProps> = observer(function HomePage(_props) {
   };
   
     // Attention pour l'instant cela ne fonctionne que lorsque l'on est non connecté
-    function GoCardDetail(titre: string, annee: string , affiche: ImageSourcePropType) {
+    function GoCardDetail(titre: string, annee: string , duree:string , genre:string ,affiche: ImageSourcePropType , synopsis: string , realisateur: string , distributions: string) {
       console.log("CardDetail");
-      _props.navigation.navigate("DetailScreen", { titre, annee , affiche}); // Passer les paramètres ici
+      _props.navigation.navigate("DetailScreen", { titre, annee , duree, genre, affiche , synopsis, realisateur ,   distributions}); // Passer les paramètres ici
     }
 
   return (
@@ -81,7 +81,10 @@ export const HomePage: FC<HomePageProps> = observer(function HomePage(_props) {
                 annee={film.annee}
                 duree={film.duree}
                 titre={film.titre}
-                onPress={() => GoCardDetail(film.titre, film.annee, film.affiche)}
+                synopsis={film.synopsis}
+                realisateur={film.realisateur}
+                distributions={film.distributions}
+                onPress={() => GoCardDetail(film.titre, film.annee,film.duree, film.genre ,film.affiche , film.synopsis , film.realisateur , film.distributions)}
               />
             ))}
           </ScrollView>
@@ -99,7 +102,10 @@ export const HomePage: FC<HomePageProps> = observer(function HomePage(_props) {
                 annee={film.annee}
                 duree={film.duree}
                 titre={film.titre}
-                onPress={() => GoCardDetail(film.titre, film.annee, film.affiche)}
+                synopsis={film.synopsis}
+                realisateur={film.realisateur}
+                distributions={film.distributions}
+                onPress={() => GoCardDetail(film.titre, film.annee, film.duree, film.genre, film.affiche, film.synopsis , film.realisateur , film.distributions)}
               />
             ))}
           </ScrollView>
@@ -117,6 +123,9 @@ export const HomePage: FC<HomePageProps> = observer(function HomePage(_props) {
                         genre={film.genre}
                         duree={film.duree}
                         titre={film.titre}
+                        synopsis={film.synopsis}
+                        realisateur={film.realisateur}
+                        distributions={film.distributions}
                       />
                     ))}
                   </ScrollView>

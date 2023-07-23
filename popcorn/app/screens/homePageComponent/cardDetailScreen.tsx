@@ -1,15 +1,17 @@
 import React from 'react';
-import { View, ViewStyle, Image, ImageSourcePropType, ImageBackground, TouchableOpacity } from 'react-native';
+import { View, ViewStyle, Image, ImageBackground, TouchableOpacity , ImageSourcePropType} from 'react-native';
 import { Text } from '../../components';
 import { colors } from '../../theme';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const CardDetailScreen = ({ route }) => {
-  const { titre, annee, affiche } = route.params;
+  const { titre, annee, affiche , duree , genre ,synopsis, realisateur, distributions } = route.params;
   const backArrrow = require("../../../assets/icons/backarrow.png")
   const heart = require("../../../assets/icons/blackheart.png")
   const popcorn = require("../../../assets/images/popcorn.png")
   const bookmark = require("../../../assets/images/bookmarks.png")
   return (
+    <ScrollView style={$scrollViewing}>
     <View style={$screenContentContainer}>
       <ImageBackground
         source={affiche}
@@ -39,13 +41,26 @@ const CardDetailScreen = ({ route }) => {
         <Image source={popcorn} style={{ height:30 , width:30}}/>
         </View>
         <View style={$titleContainer}>
-        <Text>Genre : {titre}</Text>
-        <Text>Durée : </Text>
+        <Text>Genre : {genre}</Text>
+        <Text>Durée : {duree}</Text>
         <Image source={bookmark} style={{ height:30 , width:30 , tintColor:colors.palette.red}}/>
+        </View>
+        <View style={$titleContainer}>
+        <Text>Synopsis : {synopsis}</Text>
+        </View>
+        <View style={$titleContainer}>
+        <Text>Réalisateur : {realisateur}</Text>
+        </View>
+        <View style={$titleContainer}>
+        <Text>Distribution : {distributions}</Text>
+        </View>
+        <View style={$titleContainer}>
+        <Text>Année : {annee}</Text>
         </View>
 
       </View>
     </View>
+    </ScrollView>
   );
 };
 
@@ -59,6 +74,11 @@ const $screenContentContainer: ViewStyle = {
 const $smallContentContainer: ViewStyle = {
   display: "flex",
   paddingHorizontal: 20,
+}
+
+const $scrollViewing: ViewStyle = {
+  flexGrow: 1, // This allows the ScrollView to grow and fill the available space
+  paddingBottom: 20, // Adjust as needed
 }
 
 const $titleContainer: ViewStyle = {

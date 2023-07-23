@@ -8,6 +8,9 @@ interface FilmItemProps {
   affiche: ImageSourcePropType;
   genre: string;
   annee: string;
+  synopsis: string;
+  realisateur: string;
+  distributions: string;
   duree: string;
   titre: string;
   onPress: () => void;
@@ -19,6 +22,9 @@ export const FilmItem: React.FC<FilmItemProps> = ({
   annee,
   duree,
   titre,
+  synopsis,
+  realisateur,
+  distributions,
   onPress,
 }) => (
   <TouchableOpacity onPress={onPress}>
@@ -64,6 +70,9 @@ interface FilmMayLikeItemProps {
   genre: string;
   duree: string;
   titre: string;
+  synopsis: string;
+  realisateur: string;
+  distributions: string;
 }
 
 

@@ -49,7 +49,16 @@ export type AppStackParamList = {
   First: undefined
   Home: undefined
   Login: undefined 
-  DetailScreen: { titre?: string; annee?: string , affiche?: ImageSourcePropType}; // Ajoutez les paramètres ici
+  DetailScreen: { 
+    titre?: string; 
+    annee?: string;
+    affiche?: ImageSourcePropType;
+    genre?:string;
+    duree?:string;
+    synopsis?:string; 
+    realisateur?:string; 
+    distributions?:string;
+  }; // Ajoutez les paramètres ici
   Register: undefined 
   loadingSignInScreen: undefined 
   Guest: undefined
