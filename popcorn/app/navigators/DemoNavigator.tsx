@@ -5,7 +5,7 @@ import { TextStyle, ViewStyle } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { Icon } from "../components"
 import { translate } from "../i18n"
-import { DemoCommunityScreen, DemoDebugScreen, HomePage } from "../screens"
+import { DemoCommunityScreen, DemoDebugScreen, FavPage, HomePage } from "../screens"
 import { DemoPodcastListScreen } from "../screens/DemoPodcastListScreen"
 import { colors, spacing, typography } from "../theme"
 import { AppStackParamList, AppStackScreenProps } from "./AppNavigator"
@@ -78,7 +78,7 @@ export function DemoNavigator() {
 
       <Tab.Screen
         name="Favoris"
-        component={DemoPodcastListScreen}
+        component={FavPage}
         options={{
           tabBarLabel: translate("demoNavigator.favorisTab"),
           tabBarIcon: ({ focused }) => <Icon icon="favoris" color={focused && colors.tint} />,
