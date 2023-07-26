@@ -14,7 +14,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import { StackScreenProps } from "@react-navigation/stack"
 import { observer } from "mobx-react-lite"
 import React from "react"
-import { useColorScheme } from "react-native"
+import { ImageSourcePropType, useColorScheme } from "react-native"
 import Config from "../config"
 import { useStores } from "../models" // @demo remove-current-line
 import {
@@ -27,6 +27,8 @@ import {
 } from "../screens"
 import { DemoNavigator, DemoTabParamList } from "./DemoNavigator" // @demo remove-current-line
 import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
+import CardDetailScreen from "../screens/homePageComponent/CardDetailScreen"
+
 
 
 /**
@@ -47,6 +49,16 @@ export type AppStackParamList = {
   First: undefined
   Home: undefined
   Login: undefined 
+  DetailScreen: { 
+    titre?: string; 
+    annee?: string;
+    affiche?: ImageSourcePropType;
+    genre?:string;
+    duree?:string;
+    synopsis?:string; 
+    realisateur?:string; 
+    distributions?:string;
+  }; // Ajoutez les paramètres ici
   Register: undefined 
   loadingSignInScreen: undefined 
   Guest: undefined
@@ -89,8 +101,9 @@ const AppStack = observer(function AppStack() {
         <>
           <Stack.Screen name="First" component={FirstScreen} />
           <Stack.Screen name="Home" component={HomePage} />
-          <Stack.Screen name="Login" component={LoginScreen} />
+          <Stack.Screen name="Login" component={LoginScreen}  />
           <Stack.Screen name="Register" component={RegisterScreen} />
+          <Stack.Screen name="DetailScreen" component={CardDetailScreen} />
           <Stack.Screen name="loadingSignInScreen" component={loadingSignInScreen} />
           <Stack.Screen name="Guest" component={WelcomeScreen} />
           <Stack.Screen name="Demo" component={LoginScreen} />
