@@ -119,9 +119,6 @@ export const FilmMayLikeItem: React.FC<FilmMayLikeItemProps> = ({
               <Text preset="subheading" style={{ color: colors.palette.neutral100, alignItems: "center", marginHorizontal: 15, fontSize: 8, width: 120 }}>
                 {titre}
               </Text>
-              <TouchableOpacity style={$LikeButton} >
-          <Image source={heart}  style={{ height: 35, width:35, marginTop:5 , alignItems:'center' , tintColor:colors.palette.green}}></Image>
-        </TouchableOpacity>
             </View>
           </View>
         </View>
