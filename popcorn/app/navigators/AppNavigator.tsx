@@ -18,6 +18,7 @@ import { ImageSourcePropType, useColorScheme } from "react-native"
 import Config from "../config"
 import { useStores } from "../models" // @demo remove-current-line
 import {
+  FavPage,
   FirstScreen,
   HomePage, 
   LoginScreen, 
@@ -49,6 +50,7 @@ export type AppStackParamList = {
   First: undefined
   Home: undefined
   Login: undefined 
+  Favoris: undefined
   DetailScreen: { 
     titre?: string; 
     annee?: string;
@@ -102,6 +104,7 @@ const AppStack = observer(function AppStack() {
           <Stack.Screen name="First" component={FirstScreen} />
           <Stack.Screen name="Home" component={HomePage} />
           <Stack.Screen name="Login" component={LoginScreen}  />
+          <Stack.Screen name="Favoris" component={FavPage}  />
           <Stack.Screen name="Register" component={RegisterScreen} />
           <Stack.Screen name="DetailScreen" component={CardDetailScreen} />
           <Stack.Screen name="loadingSignInScreen" component={loadingSignInScreen} />
