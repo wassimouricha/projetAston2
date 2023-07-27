@@ -12,9 +12,9 @@ interface FriendsItemProps {
     pays: string;
     statut: string;
     onPress: () => void;
+    onPress2: () => void;
   }
 
-const thierry = require("../../../assets/images/thierry.jpg")
 export const FriendsItem: React.FC<FriendsItemProps> = ({ 
   photo,
   nom,
@@ -25,9 +25,10 @@ export const FriendsItem: React.FC<FriendsItemProps> = ({
   mail,
   description,
   onPress,
+  onPress2,
 }) => (
   
-  <TouchableOpacity onPress={onPress}>
+
   <View
     style={{
       flex: 1,
@@ -40,7 +41,7 @@ export const FriendsItem: React.FC<FriendsItemProps> = ({
   <View style={{ flex: 1, borderRadius: 30, overflow: "hidden",  }}>
   
   <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center',  width:450}}>
-  <Image source={photo} style={{ height: 50, width: 50, marginRight: 15, borderRadius: 40, marginLeft:25  }} />
+  <TouchableOpacity onPress={onPress}><Image source={photo} style={{ height: 50, width: 50, marginRight: 15, borderRadius: 40, marginLeft:25  }} /></TouchableOpacity> 
                         <View>
                         <Text preset="subheading" style={{ width: 200 }}>
                         <Text preset="subheading" style={{  fontSize: 15 ,marginLeft:20 ,fontWeight: '800' }}>
@@ -50,16 +51,17 @@ export const FriendsItem: React.FC<FriendsItemProps> = ({
                         </Text>
                         
                         </View>
-                        <Text preset="subheading" style={{ width: 200, fontSize: 12 , marginLeft:10 , fontWeight: '800' }}>
+                        <TouchableOpacity onPress={onPress2}>  
+                         <Text preset="subheading" style={{ width: 200, fontSize: 12 , marginLeft:10 , fontWeight: '800' }}>
                             retirer
-                        </Text>
+                        </Text> 
+                        </TouchableOpacity>
                         </View>
 
                     <View>
   </View>
   </View>
   </View>
-  </TouchableOpacity>
 );
 
 const $LikeButton: ViewStyle = {

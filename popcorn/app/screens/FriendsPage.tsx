@@ -77,8 +77,10 @@ export const FriendsPage: FC<FriendsPageProps> = observer(function FriendsPage(_
                         statut={friend.statut}
                         pays={friend.pays}
                         onPress={() => (console.log("ok")
-                            // GoCardDetail(friend.titre, friend.annee, friend.duree, friend.genre, friend.affiche, friend.synopsis, friend.realisateur, friend.distributions)      
-                                )}            
+                            // GoCardDetail(friend.titre, friend.annee, friend.duree, friend.genre, friend.affiche, friend.synopsis, friend.realisateur, friend.distributions)  
+                     
+                                )}   
+                        onPress2={() => (console.log("retirer"))}        
                         />
                     ))}
                   </ScrollView>
