@@ -1,3 +1,5 @@
+import { exp } from "react-native-reanimated"
+
 export * from "./WelcomeScreen"
 // @demo remove-block-start
 export * from "./FirstScreen"
@@ -8,6 +10,7 @@ export * from "./loadingSignInScreen"
 export * from "./homePageComponent/CardDetailScreen"
 export * from "./FavPage"
 export * from "./FriendsPage"
+export * from "./ProfilePage"
 export * from "./DemoCommunityScreen"
 export * from "./DemoDebugScreen"
 // @demo remove-block-end

@@ -20,6 +20,7 @@ import { useStores } from "../models" // @demo remove-current-line
 import {
   FavPage,
   FriendsPage,
+  ProfilePage,
   FirstScreen,
   HomePage, 
   LoginScreen, 
@@ -52,6 +53,7 @@ export type AppStackParamList = {
   Home: undefined
   Login: undefined 
   Favoris: undefined
+  Profile: undefined
   Friends: undefined
   DetailScreen: { 
     titre?: string; 
@@ -108,6 +110,7 @@ const AppStack = observer(function AppStack() {
           <Stack.Screen name="Login" component={LoginScreen}  />
           <Stack.Screen name="Favoris" component={FavPage}  />
           <Stack.Screen name="Friends" component={FriendsPage}  />
+          <Stack.Screen name="Profile" component={ProfilePage}  />
           <Stack.Screen name="Register" component={RegisterScreen} />
           <Stack.Screen name="DetailScreen" component={CardDetailScreen} />
           <Stack.Screen name="loadingSignInScreen" component={loadingSignInScreen} />
