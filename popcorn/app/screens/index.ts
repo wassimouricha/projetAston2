@@ -7,6 +7,7 @@ export * from "./RegisterScreen"
 export * from "./loadingSignInScreen"
 export * from "./homePageComponent/CardDetailScreen"
 export * from "./FavPage"
+export * from "./FriendsPage"
 export * from "./DemoCommunityScreen"
 export * from "./DemoDebugScreen"
 // @demo remove-block-end
