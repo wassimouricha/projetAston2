@@ -16,6 +16,7 @@ interface FilmItemProps {
   onPress: () => void;
 }
 
+
 const heart = require("../../../assets/icons/blackheart.png")
 
 export const FilmItem: React.FC<FilmItemProps> = ({
@@ -176,6 +177,7 @@ export const FilmILikeItem: React.FC<FilmMayLikeItemProps> = ({
   </View>
   </TouchableOpacity>
 );
+
 
 const $LikeButton: ViewStyle = {
 

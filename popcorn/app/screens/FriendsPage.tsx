@@ -1,12 +1,13 @@
 import { observer } from "mobx-react-lite"
 import React, { FC,} from "react"
-import { TextStyle, ViewStyle , Image, ImageStyle, ImageBackground, View, ScrollView,  ImageSourcePropType, TextInput} from "react-native"
+import { TextStyle, ViewStyle , Image, ImageStyle, View, ScrollView,  ImageSourcePropType, TextInput} from "react-native"
 import { Screen, Text, } from "../components"
 import { colors, spacing } from "../theme"
 import { isRTL } from "../i18n"
 import { AppStackScreenProps } from "../navigators/AppNavigator"
-import { FilmILikeItem } from "./homePageComponent/FilmSeriesComponents"
-import { FilmILike , SeriesILike } from "../data/filmData"
+
+import { Friends } from "../data/friendsData"
+import { FriendsItem } from "./friendsPageComponent/friendsComponent"
 
 
 
@@ -63,18 +64,22 @@ export const FriendsPage: FC<FriendsPageProps> = observer(function FriendsPage(_
 
                               </View>
                       {/* Composant de liste d'amis*/}
-                      <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                    {FilmILike.map((film, index) => (
-                      <FilmILikeItem
+                      <ScrollView  showsHorizontalScrollIndicator={false}>
+                    {Friends.map((friend, index) => (
+                      <FriendsItem
                         key={index}
-                        affiche={film.affiche}
-                        genre={film.genre}
-                        duree={film.duree}
-                        titre={film.titre}
-                        synopsis={film.synopsis}
-                        realisateur={film.realisateur}
-                        distributions={film.distributions}
-                        onPress={() => GoCardDetail(film.titre, film.annee, film.duree, film.genre, film.affiche, film.synopsis, film.realisateur, film.distributions)} annee={""}                      />
+                        photo={friend.photo}
+                        nom={friend.nom}
+                        prenom={friend.prenom}
+                        description={friend.description}
+                        age={friend.age}
+                        mail={friend.mail}
+                        statut={friend.statut}
+                        pays={friend.pays}
+                        onPress={() => (console.log("ok")
+                            // GoCardDetail(friend.titre, friend.annee, friend.duree, friend.genre, friend.affiche, friend.synopsis, friend.realisateur, friend.distributions)      
+                                )}            
+                        />
                     ))}
                   </ScrollView>
               </View>
