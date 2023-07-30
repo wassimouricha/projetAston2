@@ -1,5 +1,6 @@
-import { ImageSourcePropType, TouchableOpacity, View,Image } from "react-native";
-import { Text } from "../../components";
+import { ImageSourcePropType, TouchableOpacity, View,Image, ViewStyle } from "react-native";
+import { Button, Text } from "../../components";
+import { colors, spacing } from "../../theme";
 
 interface ProfileProps {
   nom: string;
@@ -32,22 +33,52 @@ export const ProfilePicContainer: React.FC<ProfileProps> = ({
     photo,
     onPress,
 }) => (
-  <TouchableOpacity onPress={onPress}>
+
     <View
-      style={{
-        flex: 1,
-        borderRadius: 30,
-        overflow: "hidden",
-        marginTop: 20,
-        marginHorizontal: 10,
-      }}
+          style={{
+            flex: 1,
+            width: 320,
+            height: 320,
+            borderRadius: 50,
+            overflow: "hidden",
+            alignItems: "center",
+            marginHorizontal: 10,
+            shadowColor: "#000",
+            padding: 20,
+            shadowOffset: {
+              width: 0,
+              height: 2,
+            },
+            shadowOpacity: 0.58,
+            shadowRadius: 6.00,
+            elevation: 14,
+            backgroundColor: colors.palette.white,
+          }}
     >
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <Image source={photo} style={{ height: 250, width: 250, alignItems: "center", justifyContent: "center" }} />
-        <Text>
-          {nom} {prenom} {description} {mail} {age} {adresse} {statut} {amis} {likes} {dislikes} {fav}
+        <Image source={photo} style={{ height: 150, width: 150, alignItems: "center",  marginTop:20 ,borderRadius: 100 ,justifyContent: "center" }} />
+        <Text preset="subheading">
+          {prenom}  {nom}
         </Text>
+    <Text style={{color:colors.palette.gray}}>
+          {statut}
+        </Text>
+        <Button
+        testID="modify-button"
+        text="Modifier le profil"
+        style={$tapButton}
+        textStyle={{color: colors.palette.black, fontSize: 18, fontWeight: "bold"}}
+        preset="reversed"
+        onPress={onPress}
+      />
       </View>
     </View>
-  </TouchableOpacity>
 );
+
+
+
+const $tapButton: ViewStyle = {
+  marginTop: spacing.extraSmall,
+  paddingHorizontal: spacing.large,
+  borderRadius: 80,
+}

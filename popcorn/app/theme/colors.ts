@@ -21,6 +21,8 @@ const palette = {
   gray: "#D9D9D9",
   darkGray: "#4F4F4F",
   green: "#00D387",
+  black: "#000000",
+  white: "#FFFFFF",
 
   secondary100: "#DCDDE9",
   secondary200: "#BCC0D6",
