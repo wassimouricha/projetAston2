@@ -37,7 +37,6 @@ export const ProfilePicContainer: React.FC<ProfileProps> = ({
     <View
           style={{
             flex: 1,
-            width: 320,
             height: 320,
             borderRadius: 50,
             overflow: "hidden",
@@ -53,10 +52,11 @@ export const ProfilePicContainer: React.FC<ProfileProps> = ({
             shadowRadius: 6.00,
             elevation: 14,
             backgroundColor: colors.palette.white,
+            marginTop: 100,
           }}
     >
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <Image source={photo} style={{ height: 150, width: 150, alignItems: "center",  marginTop:20 ,borderRadius: 100 ,justifyContent: "center" }} />
+        <Image source={photo} style={{ height: 150, width: 150, alignItems: "center",borderRadius: 100 ,justifyContent: "center" }} />
         <Text preset="subheading">
           {prenom}  {nom}
         </Text>

@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite"
 import React, { FC,} from "react"
-import { TextStyle, ViewStyle , ImageStyle, View, Alert, ImageSourcePropType} from "react-native"
+import { TextStyle, ViewStyle , ImageStyle, View, Alert, ImageSourcePropType, ImageBackground, TouchableOpacity ,Image} from "react-native"
 import {   Screen, Text, } from "../components"
 import { colors, spacing } from "../theme"
 import { isRTL } from "../i18n"
@@ -9,22 +9,23 @@ import { ProfilePicContainer } from "./profilePageComponent/ProfilePicContainer"
 import { LoggedProfile } from "../data/loggedProfileData"
 
 
-
+const background = require("../../assets/images/background.png")
+const logout = require("../../assets/images/logout.png")
 interface ProfilePageProps  extends AppStackScreenProps<"Profile"> {}
 
 export const ProfilePage: FC<ProfilePageProps> = observer(function ProfilePage(_props) {
 
   return (
-    <Screen
-      preset="auto"
-      contentContainerStyle={$screenContentContainer}
-      safeAreaEdges={["top", "bottom"]}
-    >
-        
-  <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                    <View>
-
-                              </View>
+            <ImageBackground
+              source={background}
+              style={{ height: 350, alignItems: 'center' }}
+            >
+            <View style={ $buttonContainerOnlyRight}>
+              <TouchableOpacity style={$DisLikeButton}  onPress={() =>  Alert.alert( "Se déconnecter" )}>
+                <Image source={logout}  style={{ height: 30, width:30, marginTop:10 , alignItems:'center'}}></Image>
+              </TouchableOpacity>
+            </View>
+  <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center'  , width:320 , top:-90}}>
                                 {/* Composant de mon container pour la photo de profil */}
                                 {LoggedProfile.map((profile, index) => (
                                         <ProfilePicContainer
@@ -43,64 +44,23 @@ export const ProfilePage: FC<ProfilePageProps> = observer(function ProfilePage(_
                                             photo={profile.photo}
                                             onPress={() =>  Alert.alert( "Profil", "Vous avez cliqué sur le profil de " + profile.prenom + " " + profile.nom)}
                                             />
-                                     
                                             ))}
-
-           </View>
-    </Screen>
+            </View>
+          </ImageBackground>
   )
 })
-
-const $screenContentContainer: ViewStyle = {
-  display:"flex",
-  alignContent:"center",
-  paddingVertical: spacing.huge,
-  paddingHorizontal: spacing.large,
+const $DisLikeButton: ViewStyle = {
+  alignItems:'center',
+  justifyContent:'flex-start',
+  width:50,
+  height:50,
 }
 
-// const $signIn: TextStyle = {
-//   marginBottom: spacing.small,
-// }
-
-const $enterDetails: TextStyle = {
-  display:"flex",
-  marginBottom: spacing.large,
-  alignItems: "center",
-  justifyContent:"center",
-  color: colors.palette.red,
-  paddingHorizontal: spacing.large,
-  width: 500,
-  fontSize: 15,
+const $buttonContainerOnlyRight: ViewStyle = {
+  width: '100%',
+  display: "flex",
+  flexDirection: 'row-reverse',
+  justifyContent:'space-between',
+  paddingHorizontal: 20,
+  marginTop:30
 }
-
-const $hint: TextStyle = {
-  marginBottom: spacing.medium,
-  paddingHorizontal: spacing.large,
-  color: colors.palette.red,
-  width: 500,
-  fontSize: 15,
-}
-
-const $tapButton: ViewStyle = {
-  marginTop: spacing.extraSmall,
-}
-
-const $signupLogo: ImageStyle = {
-  display:"flex",
-  justifyContent:"center",
-  height: 269,
-  width: 350,
-  alignItems: "center",
-  transform: [{ scaleX: isRTL ? -1 : 1 }],
-}
-const $popcornLogo: ImageStyle = {
-  display:"flex",
-  justifyContent:"center",
-  width: 350,
-  alignItems: "center",
-}
-
-const $loggedName: TextStyle = {
-  color: colors.palette.red,
-}
-
