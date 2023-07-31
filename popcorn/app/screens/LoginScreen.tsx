@@ -39,11 +39,10 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
 
   const errors: typeof validationErrors = isSubmitted ? validationErrors : ({} as any)
 
-  function login() {
+  const handleLogin = async () => {
 
     setIsSubmitted(true)
     setAttemptsCount(attemptsCount + 1)
-
 
     // fait une requete au serveur afin d'avoir le token d'authentification
     // si ok , reset les champs et donne le token
@@ -53,7 +52,6 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
 
     // pour l'instant c'est un fake token.
     setAuthToken(String(Date.now()))
-
   }
 
   // pour afficher mon icone droit de mot de passe
@@ -159,7 +157,7 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
         placeholderTx="loginScreen.passwordFieldPlaceholder"
         helper={errors?.authPassword}
         status={errors?.authPassword ? "error" : undefined}
-        onSubmitEditing={login}
+        onSubmitEditing={handleLogin}
         LeftAccessory={ PasswordLeftAccessory }
         RightAccessory={PasswordRightAccessory}
       />
@@ -171,7 +169,7 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
         style={$tapButton}
         textStyle={{color: colors.palette.secondary100, }}
         preset="reversed"
-        onPress={login}
+        onPress={handleLogin}
       />
 
 
