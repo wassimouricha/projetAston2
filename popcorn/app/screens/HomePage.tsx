@@ -26,7 +26,7 @@ export const HomePage: FC<HomePageProps> = observer(function HomePage(_props) {
     // Attention pour l'instant cela ne fonctionne que lorsque l'on est non connecté
     function GoCardDetail(titre: string, annee: string , duree:string , genre:string ,affiche: ImageSourcePropType , synopsis: string , realisateur: string , distributions: string) {
       console.log("CardDetail");
-      _props.navigation.navigate("DetailScreen", { titre, annee , duree, genre, affiche , synopsis, realisateur ,   distributions}); // Passer les paramètres ici
+      _props.navigation.navigate("CardDetailScreen", { titre, annee , duree, genre, affiche , synopsis, realisateur ,   distributions}); // Passer les paramètres ici
     }
 
   return (

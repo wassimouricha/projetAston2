@@ -28,7 +28,7 @@ import {
   WelcomeScreen,
   loadingSignInScreen,
 } from "../screens"
-import { DemoNavigator, DemoTabParamList } from "./MenuNavigator" // @demo remove-current-line
+import { DemoNavigator, TabParamList, } from "./MenuNavigator" // @demo remove-current-line
 import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
 import CardDetailScreen from "../screens/homePageComponent/CardDetailScreen"
 
@@ -55,7 +55,7 @@ export type AppStackParamList = {
   Favoris: undefined
   Profile: undefined
   Friends: undefined
-  DetailScreen: { 
+  CardDetailScreen: { 
     titre?: string; 
     annee?: string;
     affiche?: ImageSourcePropType;
@@ -68,7 +68,7 @@ export type AppStackParamList = {
   Register: undefined 
   loadingSignInScreen: undefined 
   Guest: undefined
-  Demo: NavigatorScreenParams<DemoTabParamList> // @demo remove-current-line
+  Demo: NavigatorScreenParams<TabParamList> // @demo remove-current-line
   // 🔥 Your screens go here
 }
 
@@ -112,7 +112,7 @@ const AppStack = observer(function AppStack() {
           <Stack.Screen name="Friends" component={FriendsPage}  />
           <Stack.Screen name="Profile" component={ProfilePage}  />
           <Stack.Screen name="Register" component={RegisterScreen} />
-          <Stack.Screen name="DetailScreen" component={CardDetailScreen} />
+          <Stack.Screen name="CardDetailScreen" component={CardDetailScreen} />
           <Stack.Screen name="loadingSignInScreen" component={loadingSignInScreen} />
           <Stack.Screen name="Guest" component={WelcomeScreen} />
           <Stack.Screen name="Demo" component={LoginScreen} />
