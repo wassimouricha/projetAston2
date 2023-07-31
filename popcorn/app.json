@@ -17,7 +17,9 @@
       "fallbackToCacheTimeout": 0
     },
     "jsEngine": "hermes",
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "android": {
       "icon": "./assets/images/app-icon-android-legacy.png",
       "package": "com.popcorn",
@@ -48,6 +50,11 @@
         "image": "./assets/images/splash-logo-web.png",
         "resizeMode": "contain",
         "backgroundColor": "#191015"
+      }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "8aaabf9c-50aa-45c2-982b-de31b72541fa"
       }
     }
   }
