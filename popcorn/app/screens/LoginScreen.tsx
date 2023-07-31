@@ -44,7 +44,6 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
     setIsSubmitted(true)
     setAttemptsCount(attemptsCount + 1)
 
-    if (Object.values(validationErrors).some((v) => !!v)) return
 
     // fait une requete au serveur afin d'avoir le token d'authentification
     // si ok , reset les champs et donne le token
