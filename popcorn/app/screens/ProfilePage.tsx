@@ -15,11 +15,14 @@ interface ProfilePageProps  extends AppStackScreenProps<"Profile"> {}
 export const ProfilePage: FC<ProfilePageProps> = observer(function ProfilePage(_props) {
 
   return (
+    // composant englobant l'écran du telephone
     <View style={{ flex: 1 }}>
+            {/* Composant de mon image de fond d'écran */}
             <ImageBackground
               source={background}
               style={{ height: 350, alignItems: 'center' ,  zIndex:20}}
             >
+              {/* Composant de mon bouton pour se déconnecter */}
             <View style={ $buttonContainerOnlyRight}>
               <TouchableOpacity style={$DisLikeButton}  onPress={() =>  Alert.alert( "Se déconnecter" )}>
                 <Image source={logout}  style={{ height: 30, width:30, marginTop:10 , alignItems:'center'}}></Image>
