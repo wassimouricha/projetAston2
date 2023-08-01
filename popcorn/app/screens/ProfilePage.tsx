@@ -15,6 +15,7 @@ import { LoggedProfile } from "../data/loggedProfileData";
 import { ScrollView } from "react-native-gesture-handler";
 import { colors } from "../theme";
 import { ProfileFriendInfo } from "./profilePageComponent/ProfileFriendInfo";
+import { ProfileDescription } from "./profilePageComponent/Description";
 
 
 const background = require("../../assets/images/background.png");
@@ -82,19 +83,11 @@ export const ProfilePage: FC<ProfilePageProps> = observer(function ProfilePage(
               amis={profile.amis}
             />
           ))}
- 
-          <Text>
-            Les Gardiens de la Galaxie se lancent dans une nouvelle aventure qui va les mener jusqu'à la découverte de nouveaux personnages issus des comics Marvel et de la part sombre de leur héritage.
-          </Text>
-          <Text>
-            Les Gardiens de la Galaxie se lancent dans une nouvelle aventure qui va les mener jusqu'à la découverte de nouveaux personnages issus des comics Marvel et de la part sombre de leur héritage.
-          </Text>
-          <Text>
-            Les Gardiens de la Galaxie se lancent dans une nouvelle aventure qui va les mener jusqu'à la découverte de nouveaux personnages issus des comics Marvel et de la part sombre de leur héritage.
-          </Text>
-          <Text>
-            Les Gardiens de la Galaxie se lancent dans une nouvelle aventure qui va les mener jusqu'à la découverte de nouveaux personnages issus des comics Marvel et de la part sombre de leur héritage.
-          </Text>
+        {LoggedProfile.map((profile, index) => (
+            <ProfileDescription
+              description={profile.description}
+            />
+          ))}
         </View>
       </ScrollView>
     </View>
