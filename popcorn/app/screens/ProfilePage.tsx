@@ -14,7 +14,8 @@ import { ProfilePicContainer } from "./profilePageComponent/ProfilePicContainer"
 import { LoggedProfile } from "../data/loggedProfileData";
 import { ScrollView } from "react-native-gesture-handler";
 import { colors } from "../theme";
-import ProfileFriendInfo from "./profilePageComponent/ProfileFriendInfo";
+import { ProfileFriendInfo } from "./profilePageComponent/ProfileFriendInfo";
+
 
 const background = require("../../assets/images/background.png");
 const logout = require("../../assets/images/logout.png");
@@ -80,7 +81,27 @@ export const ProfilePage: FC<ProfilePageProps> = observer(function ProfilePage(
       </ImageBackground>
       <ScrollView style={{ flex: 1 }}>
         <View style={{ zIndex: -20, marginTop: 80 }}>
-        <ProfileFriendInfo />
+        {LoggedProfile.map((profile, index) => (
+            <ProfileFriendInfo
+              key={index}
+              nom={profile.nom}
+              prenom={profile.prenom}
+              fav={profile.fav}
+              likes={profile.likes}
+              dislikes={profile.dislikes}
+              age={profile.age}
+              statut={profile.statut}
+              adresse={profile.adresse}
+              mail={profile.mail}
+              description={profile.description}
+              amis={profile.amis}
+              photo={profile.photo}
+              onPress={() =>
+                console.log("Profil", "Vous avez cliqué sur le profil d")
+              }
+            />
+          ))}
+ 
           <Text>
             Les Gardiens de la Galaxie se lancent dans une nouvelle aventure qui va les mener jusqu'à la découverte de nouveaux personnages issus des comics Marvel et de la part sombre de leur héritage.
           </Text>
