@@ -5,15 +5,7 @@ import { colors, spacing } from "../../theme";
 interface ProfileProps {
   nom: string;
   prenom: string;
-  description: string;
-  mail: string;
-  age: string;
-  adresse: string;
   statut: string;
-  amis: number;
-  likes: number;
-  dislikes: number;
-  fav: number;
   photo: ImageSourcePropType;
   onPress: () => void;
 }
@@ -21,15 +13,7 @@ interface ProfileProps {
 export const ProfilePicContainer: React.FC<ProfileProps> = ({
     nom,
     prenom,
-    description,
-    mail,
-    age,
-    adresse,
     statut,
-    amis,
-    likes,
-    dislikes,
-    fav,
     photo,
     onPress,
 }) => (

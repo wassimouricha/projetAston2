@@ -59,15 +59,7 @@ export const ProfilePage: FC<ProfilePageProps> = observer(function ProfilePage(
               key={index}
               nom={profile.nom}
               prenom={profile.prenom}
-              fav={profile.fav}
-              likes={profile.likes}
-              dislikes={profile.dislikes}
-              age={profile.age}
               statut={profile.statut}
-              adresse={profile.adresse}
-              mail={profile.mail}
-              description={profile.description}
-              amis={profile.amis}
               photo={profile.photo}
               onPress={() =>
                 Alert.alert(
@@ -84,21 +76,10 @@ export const ProfilePage: FC<ProfilePageProps> = observer(function ProfilePage(
         {LoggedProfile.map((profile, index) => (
             <ProfileFriendInfo
               key={index}
-              nom={profile.nom}
-              prenom={profile.prenom}
               fav={profile.fav}
               likes={profile.likes}
               dislikes={profile.dislikes}
-              age={profile.age}
-              statut={profile.statut}
-              adresse={profile.adresse}
-              mail={profile.mail}
-              description={profile.description}
               amis={profile.amis}
-              photo={profile.photo}
-              onPress={() =>
-                console.log("Profil", "Vous avez cliqué sur le profil d")
-              }
             />
           ))}
  

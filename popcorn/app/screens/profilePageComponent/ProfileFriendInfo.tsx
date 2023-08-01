@@ -10,36 +10,18 @@ const heart = require("../../../assets/icons/blackheart.png");
 const cross = require("../../../assets/icons/x.png");
 
 interface ProfileProps {
-    nom: string;
-    prenom: string;
-    description: string;
-    mail: string;
-    age: string;
-    adresse: string;
-    statut: string;
     amis: number;
     likes: number;
     dislikes: number;
     fav: number;
-    photo: ImageSourcePropType;
-    onPress: () => void;
   }
   
 
 export const ProfileFriendInfo : React.FC<ProfileProps>= ({
-    nom,
-    prenom,
-    description,
-    mail,
-    age,
-    adresse,
-    statut,
     amis,
     likes,
     dislikes,
     fav,
-    photo,
-    onPress,
 }) => (
     <View>
       <View style={{ flexDirection: "row" }}>
