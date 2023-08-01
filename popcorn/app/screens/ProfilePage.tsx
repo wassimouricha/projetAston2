@@ -16,6 +16,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import { colors } from "../theme";
 import { ProfileFriendInfo } from "./profilePageComponent/ProfileFriendInfo";
 import { ProfileDescription } from "./profilePageComponent/Description";
+import { ProfilePersonal } from "./profilePageComponent/PersonalInfo";
 
 
 const background = require("../../assets/images/background.png");
@@ -86,6 +87,13 @@ export const ProfilePage: FC<ProfilePageProps> = observer(function ProfilePage(
         {LoggedProfile.map((profile, index) => (
             <ProfileDescription
               description={profile.description}
+            />
+          ))}
+        {LoggedProfile.map((profile, index) => (
+            <ProfilePersonal
+              mail={profile.mail}
+              age={profile.age}
+              adresse={profile.adresse}
             />
           ))}
         </View>
