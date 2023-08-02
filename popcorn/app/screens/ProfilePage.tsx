@@ -15,6 +15,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import { ProfileFriendInfo } from "./profilePageComponent/ProfileFriendInfo";
 import { ProfileDescription } from "./profilePageComponent/Description";
 import { ProfilePersonal } from "./profilePageComponent/PersonalInfo";
+import { handleNavigateToModification } from "../utils/GoModificationProfilePage";
 
 
 
@@ -29,10 +30,6 @@ export const ProfilePage: FC<ProfilePageProps> = observer(function ProfilePage(
   _props
 ) {
 
-function handleNavigateToModification() {
-  console.log("ModificationProfilePage")
-  _props.navigation.navigate("ModificationProfilePage");
-};
 
   return (
     <View style={{ flex: 1 }}>
@@ -69,7 +66,7 @@ function handleNavigateToModification() {
               statut={profile.statut}
               photo={profile.photo}
               onPress={() =>
-                handleNavigateToModification()
+                handleNavigateToModification(_props)
               }
             />
           ))}
