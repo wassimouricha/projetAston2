@@ -102,8 +102,10 @@ const AppStack = observer(function AppStack() {
   
       {isAuthenticated ? (
         <>
+        {/* les écran ayant besoin d'etre authantifié pour y acceder */}
           <Stack.Screen name="Welcome" component={WelcomeScreen} />
           <Stack.Screen name="CardDetailScreen" component={CardDetailScreen} />
+          <Stack.Screen name="ModificationProfilePage" component={ModificationProfilePage}  />
           <Stack.Screen name="Demo" component={DemoNavigator} />
         </>
       ) : (
@@ -114,7 +116,6 @@ const AppStack = observer(function AppStack() {
           <Stack.Screen name="Favoris" component={FavPage}  />
           <Stack.Screen name="Friends" component={FriendsPage}  />
           <Stack.Screen name="Profile" component={ProfilePage}  />
-          <Stack.Screen name="ModificationProfilePage" component={ModificationProfilePage}  />
           <Stack.Screen name="Register" component={RegisterScreen} />
           <Stack.Screen name="CardDetailScreen" component={CardDetailScreen} />
           <Stack.Screen name="loadingSignInScreen" component={loadingSignInScreen} />

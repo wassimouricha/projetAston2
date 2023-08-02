@@ -33,6 +33,7 @@ function handleNavigateToModification() {
   console.log("ModificationProfilePage")
   _props.navigation.navigate("ModificationProfilePage");
 };
+
   return (
     <View style={{ flex: 1 }}>
       <ImageBackground
