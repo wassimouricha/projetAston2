@@ -30,7 +30,7 @@ export const ProfilePage: FC<ProfilePageProps> = observer(function ProfilePage(
 ) {
 
 function handleNavigateToModification() {
-  console.log("ModificationProfile")
+  console.log("ModificationProfilePage")
   _props.navigation.navigate("ModificationProfilePage");
 };
   return (

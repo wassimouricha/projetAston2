@@ -12,10 +12,9 @@ import { LoggedProfile } from "../data/loggedProfileData";
 import { ScrollView } from "react-native-gesture-handler";
 
 
-
 const background = require("../../assets/images/background.png");
 
-interface ModificationProfilePageProps extends AppStackScreenProps<"ModificationProfile"> {}
+interface ModificationProfilePageProps extends AppStackScreenProps<"ModificationProfilePage"> {}
 
 export const ModificationProfilePage: FC<ModificationProfilePageProps> = observer(function ModificationProfilePage(
   _props
