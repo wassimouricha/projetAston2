@@ -5,51 +5,27 @@ import {
   View,
   Alert,
   ImageBackground,
-  TouchableOpacity,
-  Image,
 } from "react-native";
 import { AppStackScreenProps } from "../navigators/AppNavigator";
 import { ProfilePicContainer } from "./profilePageComponent/ProfilePicContainer";
 import { LoggedProfile } from "../data/loggedProfileData";
 import { ScrollView } from "react-native-gesture-handler";
-import { ProfileFriendInfo } from "./profilePageComponent/ProfileFriendInfo";
-import { ProfileDescription } from "./profilePageComponent/Description";
-import { ProfilePersonal } from "./profilePageComponent/PersonalInfo";
-
 
 
 
 const background = require("../../assets/images/background.png");
-const logout = require("../../assets/images/logout.png");
 
-interface ProfilePageProps extends AppStackScreenProps<"Profile"> {}
+interface ModificationProfilePageProps extends AppStackScreenProps<"ModificationProfile"> {}
 
-
-export const ProfilePage: FC<ProfilePageProps> = observer(function ProfilePage(
+export const ModificationProfilePage: FC<ModificationProfilePageProps> = observer(function ModificationProfilePage(
   _props
 ) {
-
-function handleNavigateToModification() {
-  console.log("ModificationProfile")
-  _props.navigation.navigate("ModificationProfilePage");
-};
   return (
     <View style={{ flex: 1 }}>
       <ImageBackground
         source={background}
         style={{ height: 350, alignItems: "center", zIndex: 20 }}
       >
-        <View style={$buttonContainerOnlyRight}>
-          <TouchableOpacity
-            style={$DisLikeButton}
-            onPress={() => Alert.alert("Se déconnecter")}
-          >
-            <Image
-              source={logout}
-              style={{ height: 30, width: 30, marginTop: 10, alignItems: "center" }}
-            />
-          </TouchableOpacity>
-        </View>
         <View
           style={{
             flexDirection: "row",
@@ -68,7 +44,10 @@ function handleNavigateToModification() {
               statut={profile.statut}
               photo={profile.photo}
               onPress={() =>
-                handleNavigateToModification()
+                Alert.alert(
+                  "Profil",
+                  "HAHAHAHAHAHAHAHAHAHAHVous avez cliqué sur le profil de " + profile.prenom + " " + profile.nom
+                )
               }
             />
           ))}
@@ -76,29 +55,6 @@ function handleNavigateToModification() {
       </ImageBackground>
       <ScrollView style={{ flex: 1 }}>
         <View style={{ zIndex: -20, marginTop: 80 }}>
-        {LoggedProfile.map((profile, index) => (
-            <ProfileFriendInfo
-              key={index}
-              fav={profile.fav}
-              likes={profile.likes}
-              dislikes={profile.dislikes}
-              amis={profile.amis}
-            />
-          ))}
-        {LoggedProfile.map((profile, index) => (
-            <ProfileDescription
-            key={index}
-              description={profile.description}
-            />
-          ))}
-        {LoggedProfile.map((profile, index) => (
-            <ProfilePersonal
-              key={index}
-              mail={profile.mail}
-              age={profile.age}
-              adresse={profile.adresse}
-            />
-          ))}
         </View>
       </ScrollView>
     </View>

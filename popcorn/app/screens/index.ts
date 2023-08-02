@@ -11,6 +11,7 @@ export * from "./homePageComponent/CardDetailScreen"
 export * from "./FavPage"
 export * from "./FriendsPage"
 export * from "./ProfilePage"
+export * from "./ModificationProfilePage"
 export * from "./DemoCommunityScreen"
 export * from "./DemoDebugScreen"
 // @demo remove-block-end
