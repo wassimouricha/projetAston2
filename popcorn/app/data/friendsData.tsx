@@ -2,6 +2,7 @@ import { ImageSourcePropType } from "react-native";
 
 export const Friends = [
     {
+      id: 1,
       photo: require("../../assets/images/thierry.jpg") as ImageSourcePropType ,
       nom: "Henry",
       prenom: "Thierry",
@@ -12,6 +13,7 @@ export const Friends = [
       statut: "Légende",
     },
     {
+      id: 2,
       photo: require("../../assets/images/dede.jpg") as ImageSourcePropType ,
       nom: "Didier",
       prenom: "Deschamps",
@@ -22,6 +24,7 @@ export const Friends = [
       statut: "Légende",
     },
     {
+      id: 3,
       photo: require("../../assets/images/tre.jpg") as ImageSourcePropType ,
       nom: "Trezeguet",
       prenom: "David",
@@ -32,6 +35,7 @@ export const Friends = [
       statut: "Légende",
     },
     {
+      id: 4,
       photo: require("../../assets/images/sam.jpg") as ImageSourcePropType ,
       nom: "Jackson",
       prenom: "Samuel L.",
@@ -42,6 +46,7 @@ export const Friends = [
       statut: "Grand acteur",
     },
     {
+      id: 5,
       photo: require("../../assets/images/sam.jpg") as ImageSourcePropType ,
       nom: "Jackson",
       prenom: "Samuel L.",
@@ -52,6 +57,7 @@ export const Friends = [
       statut: "Grand acteur",
     },
     {
+      id: 6,
       photo: require("../../assets/images/sam.jpg") as ImageSourcePropType ,
       nom: "Jackson",
       prenom: "Samuel L.",
@@ -62,6 +68,7 @@ export const Friends = [
       statut: "Grand acteur",
     },
     {
+      id: 7,
       photo: require("../../assets/images/sam.jpg") as ImageSourcePropType ,
       nom: "Jackson",
       prenom: "Samuel L.",
@@ -72,6 +79,7 @@ export const Friends = [
       statut: "Grand acteur",
     },
     {
+      id: 8,
       photo: require("../../assets/images/sam.jpg") as ImageSourcePropType ,
       nom: "Jackson",
       prenom: "Samuel L.",
@@ -82,6 +90,7 @@ export const Friends = [
       statut: "Grand acteur",
     },
     {
+      id: 9,
       photo: require("../../assets/images/sam.jpg") as ImageSourcePropType ,
       nom: "Jackson",
       prenom: "Samuel L.",
@@ -92,6 +101,7 @@ export const Friends = [
       statut: "Grand acteur",
     },
     {
+      id: 10,
       photo: require("../../assets/images/sam.jpg") as ImageSourcePropType ,
       nom: "Jackson",
       prenom: "Samuel L.",
@@ -102,6 +112,7 @@ export const Friends = [
       statut: "Grand acteur",
     },
     {
+      id: 11,
       photo: require("../../assets/images/sam.jpg") as ImageSourcePropType ,
       nom: "Jackson",
       prenom: "Samuel L.",

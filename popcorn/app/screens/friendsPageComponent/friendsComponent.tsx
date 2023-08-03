@@ -3,6 +3,7 @@ import { Text } from "../../components";
 
 
 interface FriendsItemProps {
+    id : number;
     photo: ImageSourcePropType;
     nom: string;
     prenom: string;
@@ -12,10 +13,11 @@ interface FriendsItemProps {
     pays: string;
     statut: string;
     onPress: () => void;
-    onPress2: () => void;
+    onPressRemove: (id: number) => void;
   }
 
 export const FriendsItem: React.FC<FriendsItemProps> = ({ 
+  id,
   photo,
   nom,
   prenom,
@@ -25,7 +27,7 @@ export const FriendsItem: React.FC<FriendsItemProps> = ({
   mail,
   description,
   onPress,
-  onPress2,
+  onPressRemove,
 }) => (
   
 
@@ -51,7 +53,7 @@ export const FriendsItem: React.FC<FriendsItemProps> = ({
                         </Text>
                         
                         </View>
-                        <TouchableOpacity onPress={onPress2}>  
+                        <TouchableOpacity onPress={() => onPressRemove(id)}>  
                          <Text preset="subheading" style={{ width: 200, fontSize: 12 , marginLeft:10 , fontWeight: '800' }}>
                             retirer
                         </Text> 

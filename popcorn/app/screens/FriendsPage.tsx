@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite"
-import React, { FC,} from "react"
+import React, { FC, useState,} from "react"
 import { TextStyle, ViewStyle , Image, ImageStyle, View, ScrollView,  ImageSourcePropType, TextInput} from "react-native"
 import { Screen, Text, } from "../components"
 import { colors, spacing } from "../theme"
@@ -16,6 +16,16 @@ interface FriendsPageProps  extends AppStackScreenProps<"Friends"> {titre?: stri
 const thierry = require("../../assets/images/thierry.jpg")
 const loggedName = "Thierry"
 export const FriendsPage: FC<FriendsPageProps> = observer(function FriendsPage(_props) {
+  const [friendsList, setFriendsList] = useState(Friends);
+
+  // Nouvelle fonction pour gérer la suppression d'un ami
+  const handleRemoveFriend = (id: number) => {
+    // Supprimer l'ami de la liste en filtrant les amis avec l'ID différent de celui qui doit être supprimé
+    const updatedFriendsList = friendsList.filter((friend) => friend.id !== id);
+    setFriendsList(updatedFriendsList);
+    console.log("Ami avec ID", id, "supprimé");
+  };
+  
 
   return (
     <Screen
@@ -59,9 +69,10 @@ export const FriendsPage: FC<FriendsPageProps> = observer(function FriendsPage(_
                               </View>
                       {/* Composant de liste d'amis*/}
                       <ScrollView  showsHorizontalScrollIndicator={false}>
-                    {Friends.map((friend, index) => (
+                    {friendsList.map((friend, index) => (
                       <FriendsItem
                         key={index}
+                        id={friend.id}
                         photo={friend.photo}
                         nom={friend.nom}
                         prenom={friend.prenom}
@@ -71,9 +82,8 @@ export const FriendsPage: FC<FriendsPageProps> = observer(function FriendsPage(_
                         statut={friend.statut}
                         pays={friend.pays}
                         onPress={() => (console.log("ok")
-                     
                                 )}   
-                        onPress2={() => (console.log("retirer"))}        
+                        onPressRemove={handleRemoveFriend} // Passage de la fonction pour gérer la suppression d'un ami
                         />
                     ))}
                   </ScrollView>
