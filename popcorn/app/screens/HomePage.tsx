@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite"
-import React, { FC,} from "react"
+import React, { FC, useState,} from "react"
 import { TextStyle, ViewStyle , Image, ImageStyle, ImageBackground, View, ScrollView, TextInput, Touchable, TouchableOpacity, Alert, ImageSourcePropType} from "react-native"
 import {  Button, Screen, Text, } from "../components"
 import { colors, spacing } from "../theme"
@@ -18,13 +18,15 @@ const thierry = require("../../assets/images/thierry.jpg")
 export const HomePage: FC<HomePageProps> = observer(function HomePage(_props) {
 
   const loggedName = "Thierry"
-  const handleFilmItemClick = (filmTitre , anneeTitre) => {
-    // Ici, vous pouvez implémenter l'action à effectuer lorsqu'un FilmItem est cliqué.
-    // Par exemple, afficher une alerte avec le titre du film.
-    Alert.alert('Film sélectionné', `Vous avez sélectionné le film : ${filmTitre} sortie en  : ${anneeTitre}`);
-  };
-  
-
+  // état local pour stocker la valeur de recherche dans le composant
+  const [searchText, setSearchText] = useState("");
+  // filtrer les films par rapport à la valeur de recherche dans la section sortie de la semaine
+  // lorsqu'on va taper le titre d'un film dans l'input le composant va filtrer les films et afficher
+  // uniquement les films qui contiennent le texte tapé dans l'input
+  const filteredFilms = films.filter((film) =>
+  // la recherche est insensible à la casse ce qui veut dire que si on tape "a" ou "A" on aura le même résultat
+  film.titre.toLowerCase().includes(searchText.toLowerCase())
+);
 
   return (
     <Screen
@@ -54,9 +56,7 @@ export const HomePage: FC<HomePageProps> = observer(function HomePage(_props) {
                       <TextInput
                       placeholder="Rechercher votre film/série..."
                       style={{ backgroundColor: colors.palette.gray, margin: 10, paddingHorizontal: 10, borderRadius: 8, height: 40 }}
-                      onChangeText={(text) => {
-
-                      }}
+                      onChangeText={(text)  => setSearchText(text)}
                     />
                 
                 </View>
@@ -69,22 +69,38 @@ export const HomePage: FC<HomePageProps> = observer(function HomePage(_props) {
 
                               </View>
                                 {/* Composant de scrolling horizontal contenant mes cartes des sorties de la semaine */}
+                                
                                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-            {films.map((film, index) => (
-              <FilmItem
-                key={index}
-                affiche={film.affiche}
-                genre={film.genre}
-                annee={film.annee}
-                duree={film.duree}
-                titre={film.titre}
-                synopsis={film.synopsis}
-                realisateur={film.realisateur}
-                distributions={film.distributions}
-                onPress={() => GoCardDetail( _props,film.titre, film.annee,
-                    film.duree, film.genre, film.affiche, film.synopsis , film.realisateur , film.distributions )}
-              />
-            ))}
+                                    {filteredFilms.length === 0 ? (
+                                      <Text  preset="subheading"  style={$enterDetails }>Oups, nous n'avons rien trouvé !</Text>
+                                    ) : (
+                                      filteredFilms.map((film, index) => (
+                                        <FilmItem
+                                          key={index}
+                                          affiche={film.affiche}
+                                          genre={film.genre}
+                                          annee={film.annee}
+                                          duree={film.duree}
+                                          titre={film.titre}
+                                          synopsis={film.synopsis}
+                                          realisateur={film.realisateur}
+                                          distributions={film.distributions}
+                                          onPress={() =>
+                                            GoCardDetail(
+                                              _props,
+                                              film.titre,
+                                              film.annee,
+                                              film.duree,
+                                              film.genre,
+                                              film.affiche,
+                                              film.synopsis,
+                                              film.realisateur,
+                                              film.distributions
+                                            )
+                                          }
+                                        />
+                                      ))
+                                    )}
           </ScrollView>
 
           <View style={{flex: 1, alignItems: 'center', justifyContent: 'center' , marginTop:20}}>
@@ -144,47 +160,18 @@ const $screenContentContainer: ViewStyle = {
   paddingHorizontal: spacing.large,
 }
 
-// const $signIn: TextStyle = {
-//   marginBottom: spacing.small,
-// }
 
 const $enterDetails: TextStyle = {
-  display:"flex",
-  marginBottom: spacing.large,
+  display: "flex",
   alignItems: "center",
-  justifyContent:"center",
+  justifyContent: "center",
+  textAlign: "center",
   color: colors.palette.red,
-  paddingHorizontal: spacing.large,
-  width: 500,
-  fontSize: 15,
-}
+  fontSize: 12,
+  flexWrap: "wrap",
+  marginLeft:50
+};
 
-const $hint: TextStyle = {
-  marginBottom: spacing.medium,
-  paddingHorizontal: spacing.large,
-  color: colors.palette.red,
-  width: 500,
-  fontSize: 15,
-}
-
-const $tapButton: ViewStyle = {
-  marginTop: spacing.extraSmall,
-}
-
-const $signupLogo: ImageStyle = {
-  display:"flex",
-  justifyContent:"center",
-  height: 269,
-  width: 350,
-  alignItems: "center",
-  transform: [{ scaleX: isRTL ? -1 : 1 }],
-}
-const $popcornLogo: ImageStyle = {
-  display:"flex",
-  justifyContent:"center",
-  width: 350,
-  alignItems: "center",
-}
 
 const $loggedName: TextStyle = {
   color: colors.palette.red,
