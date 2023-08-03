@@ -8,27 +8,29 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
-import { Text } from "../components";
 import { AppStackScreenProps } from "../navigators/AppNavigator";
 import { ProfilePicContainer } from "./profilePageComponent/ProfilePicContainer";
 import { LoggedProfile } from "../data/loggedProfileData";
 import { ScrollView } from "react-native-gesture-handler";
-import { colors } from "../theme";
 import { ProfileFriendInfo } from "./profilePageComponent/ProfileFriendInfo";
 import { ProfileDescription } from "./profilePageComponent/Description";
 import { ProfilePersonal } from "./profilePageComponent/PersonalInfo";
+import { handleNavigateToModification } from "../utils/GoModificationProfilePage";
+
+
 
 
 const background = require("../../assets/images/background.png");
 const logout = require("../../assets/images/logout.png");
-const friends = require("../../assets/icons/community.png");
-const bookmark = require("../../assets/images/bookmarks.png");
 
 interface ProfilePageProps extends AppStackScreenProps<"Profile"> {}
+
 
 export const ProfilePage: FC<ProfilePageProps> = observer(function ProfilePage(
   _props
 ) {
+
+
   return (
     <View style={{ flex: 1 }}>
       <ImageBackground
@@ -63,11 +65,9 @@ export const ProfilePage: FC<ProfilePageProps> = observer(function ProfilePage(
               prenom={profile.prenom}
               statut={profile.statut}
               photo={profile.photo}
+              textInButton="Modifier le profil"
               onPress={() =>
-                Alert.alert(
-                  "Profil",
-                  "Vous avez cliqué sur le profil de " + profile.prenom + " " + profile.nom
-                )
+                handleNavigateToModification(_props)
               }
             />
           ))}
@@ -86,11 +86,13 @@ export const ProfilePage: FC<ProfilePageProps> = observer(function ProfilePage(
           ))}
         {LoggedProfile.map((profile, index) => (
             <ProfileDescription
+            key={index}
               description={profile.description}
             />
           ))}
         {LoggedProfile.map((profile, index) => (
             <ProfilePersonal
+              key={index}
               mail={profile.mail}
               age={profile.age}
               adresse={profile.adresse}

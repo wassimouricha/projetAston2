@@ -21,6 +21,7 @@ import {
   FavPage,
   FriendsPage,
   ProfilePage,
+  ModificationProfilePage,
   FirstScreen,
   HomePage, 
   LoginScreen, 
@@ -54,6 +55,7 @@ export type AppStackParamList = {
   Login: undefined 
   Favoris: undefined
   Profile: undefined
+  ModificationProfilePage: undefined
   Friends: undefined
   CardDetailScreen: { 
     titre?: string; 
@@ -100,8 +102,10 @@ const AppStack = observer(function AppStack() {
   
       {isAuthenticated ? (
         <>
+        {/* les écran ayant besoin d'etre authantifié pour y acceder */}
           <Stack.Screen name="Welcome" component={WelcomeScreen} />
           <Stack.Screen name="CardDetailScreen" component={CardDetailScreen} />
+          <Stack.Screen name="ModificationProfilePage" component={ModificationProfilePage}  />
           <Stack.Screen name="Demo" component={DemoNavigator} />
         </>
       ) : (
