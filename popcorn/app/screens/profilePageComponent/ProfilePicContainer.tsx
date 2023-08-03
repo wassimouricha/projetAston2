@@ -7,6 +7,7 @@ interface ProfileProps {
   prenom: string;
   statut: string;
   photo: ImageSourcePropType;
+  textInButton: string;
   onPress: () => void;
 }
 
@@ -15,6 +16,7 @@ export const ProfilePicContainer: React.FC<ProfileProps> = ({
     prenom,
     statut,
     photo,
+    textInButton,
     onPress,
 }) => (
 
@@ -49,7 +51,7 @@ export const ProfilePicContainer: React.FC<ProfileProps> = ({
         </Text>
         <Button
         testID="modify-button"
-        text="Modifier le profil"
+        text={textInButton}
         style={$tapButton}
         textStyle={{color: colors.palette.black, fontSize: 18, fontWeight: "bold"}}
         preset="reversed"

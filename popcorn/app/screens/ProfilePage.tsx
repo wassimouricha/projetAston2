@@ -65,6 +65,7 @@ export const ProfilePage: FC<ProfilePageProps> = observer(function ProfilePage(
               prenom={profile.prenom}
               statut={profile.statut}
               photo={profile.photo}
+              textInButton="Modifier le profil"
               onPress={() =>
                 handleNavigateToModification(_props)
               }

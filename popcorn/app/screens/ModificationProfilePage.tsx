@@ -38,7 +38,7 @@ export const ModificationProfilePage: FC<ModificationProfilePageProps> = observe
             justifyContent: "center",
             alignItems: "center",
             width: 320,
-            top: -90,
+            top: -20,
             zIndex: 20,
           }}
         >
@@ -49,10 +49,11 @@ export const ModificationProfilePage: FC<ModificationProfilePageProps> = observe
               prenom={profile.prenom}
               statut={profile.statut}
               photo={profile.photo}
+              textInButton="Accepter les modifications"
               onPress={() =>
                 Alert.alert(
                   "Profil",
-                  "HAHAHAHAHAHAHAHAHAHAH Vous avez modifié sur le profil de " + profile.prenom + " " + profile.nom
+                  "Vous avez modifié le profil de " + profile.prenom + " " + profile.nom
                 )
               }
             />
@@ -60,7 +61,7 @@ export const ModificationProfilePage: FC<ModificationProfilePageProps> = observe
         </View>
       </ImageBackground>
       <ScrollView style={{ flex: 1 }}>
-        <View style={{ zIndex: -20, marginTop: 60 }}>
+        <View style={{ zIndex: -20, marginTop: 80 }}>
           <View style={{marginLeft:20}}>
                 <View style={{flexDirection:'row' , justifyContent:'center' , alignItems:'center' ,backgroundColor: colors.palette.gray, width:350 , borderRadius:40 , marginTop:10 , marginBottom:10}}>
                    {/* Input de modification */}
