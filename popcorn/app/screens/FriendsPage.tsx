@@ -17,12 +17,6 @@ const thierry = require("../../assets/images/thierry.jpg")
 const loggedName = "Thierry"
 export const FriendsPage: FC<FriendsPageProps> = observer(function FriendsPage(_props) {
 
-    // Attention pour l'instant cela ne fonctionne que lorsque l'on est non connecté
-    function GoCardDetail(titre: string, annee: string , duree:string , genre:string ,affiche: ImageSourcePropType , synopsis: string , realisateur: string , distributions: string) {
-      console.log("CardDetail");
-      _props.navigation.navigate("CardDetailScreen", { titre, annee , duree, genre, affiche , synopsis, realisateur ,   distributions}); // Passer les paramètres ici
-    }
-
   return (
     <Screen
       preset="auto"
@@ -77,7 +71,6 @@ export const FriendsPage: FC<FriendsPageProps> = observer(function FriendsPage(_
                         statut={friend.statut}
                         pays={friend.pays}
                         onPress={() => (console.log("ok")
-                            // GoCardDetail(friend.titre, friend.annee, friend.duree, friend.genre, friend.affiche, friend.synopsis, friend.realisateur, friend.distributions)  
                      
                                 )}   
                         onPress2={() => (console.log("retirer"))}        
@@ -100,9 +93,6 @@ const $screenContentContainer: ViewStyle = {
   paddingHorizontal: spacing.large,
 }
 
-// const $signIn: TextStyle = {
-//   marginBottom: spacing.small,
-// }
 
 const $enterDetails: TextStyle = {
   display:"flex",
