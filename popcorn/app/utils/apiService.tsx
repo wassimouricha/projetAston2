@@ -89,3 +89,38 @@ export const fetchSerieDetails = async (serieId: number) => {
       throw error;
     }
   };
+
+  //fonction pour récupérer les détails d'un film recommandé spécifique par son ID
+export const fetchFilmMayLikeDetails = async (movieId: number) => {
+    try {
+      const response = await axios.get(`${baseURL}/movie/${movieId}`, {
+        params: {
+          api_key: apiKey,
+          language: "fr-FR",
+        },
+      });
+  
+      const creditsResponse = await axios.get(`${baseURL}/movie/${movieId}/credits`, {
+        params: {
+          api_key: apiKey,
+        },
+      });
+  
+      const movieDetails = response.data;
+      const creditsData = creditsResponse.data;
+  
+      // Pour le réalisateur, nous prenons le premier membre de l'équipe de direction
+      const director = creditsData.crew.find((crewMember: any) => crewMember.job === "Director");
+      const actors = creditsData.cast.slice(0, 3).map((actor: any) => actor.name);
+  
+      return {
+        ...movieDetails,
+        director: director ? director.name : "Inconnu",
+        actors: actors.join(", ") || "Inconnu",
+      };
+    } catch (error) {
+      console.error('Erreur lors de la récupération des détails du film recommandé :', error);
+      throw error;
+    }
+  };
+  
