@@ -16,8 +16,14 @@ interface FriendsPageProps  extends AppStackScreenProps<"Friends"> {titre?: stri
 const thierry = require("../../assets/images/thierry.jpg")
 const loggedName = "Thierry"
 export const FriendsPage: FC<FriendsPageProps> = observer(function FriendsPage(_props) {
-  const [friendsList, setFriendsList] = useState(Friends);
+  // Fonction de recherche d'amis
+  const [searchText, setSearchText] = useState("");
+  const filteredFriends = Friends.filter((friend) =>
+  // la recherche est insensible à la casse ce qui veut dire que si on tape "a" ou "A" on aura le même résultat
+  friend.prenom.toLowerCase().includes(searchText.toLowerCase())
+);
 
+  const [friendsList, setFriendsList] = useState(Friends);
   // Nouvelle fonction pour gérer la suppression d'un ami
   const handleRemoveFriend = (id: number) => {
     // Supprimer l'ami de la liste en filtrant les amis avec l'ID différent de celui qui doit être supprimé
@@ -55,9 +61,7 @@ export const FriendsPage: FC<FriendsPageProps> = observer(function FriendsPage(_
                       <TextInput
                       placeholder="Rechercher parimis mes amis"
                       style={{ backgroundColor: colors.palette.gray, margin: 10, paddingHorizontal: 10, borderRadius: 8, height: 40 }}
-                      onChangeText={(text) => {
-
-                      }}
+                      onChangeText={(text)  => setSearchText(text)}
                     />
                 
                 </View>
@@ -69,7 +73,10 @@ export const FriendsPage: FC<FriendsPageProps> = observer(function FriendsPage(_
                               </View>
                       {/* Composant de liste d'amis*/}
                       <ScrollView  showsHorizontalScrollIndicator={false}>
-                    {friendsList.map((friend, index) => (
+                       {filteredFriends.length === 0 ? (
+                        <Text  preset="subheading"  style={$enterDetails }>Oups, nous n'avons rien trouvé !</Text>
+                      ) :
+                    filteredFriends.map((friend, index) => (
                       <FriendsItem
                         key={index}
                         id={friend.id}
