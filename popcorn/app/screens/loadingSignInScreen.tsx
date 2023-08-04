@@ -49,20 +49,6 @@ const $screenContentContainer: ViewStyle = {
   paddingHorizontal: spacing.large,
 }
 
-const $textField: ViewStyle = {
-  marginBottom: spacing.large,
-}
-
-const $ContainertextField: ViewStyle = {
-  borderRadius: 80,
-  backgroundColor: colors.palette.gray  ,
-}
-
-
-
-const $tapButton: ViewStyle = {
-  marginTop: spacing.extraSmall,
-}
 
 const $signupLogo: ImageStyle = {
   display:"flex",
@@ -72,12 +58,6 @@ const $signupLogo: ImageStyle = {
   alignItems: "center",
   transform: [{ scaleX: isRTL ? -1 : 1 }],
 }
-const $popcornLogo: ImageStyle = {
-  display:"flex",
-  justifyContent:"center",
-  width: 350,
-  alignItems: "center",
-}
 
 const $enterDetails: TextStyle = {
     display:"flex",
@@ -86,6 +66,5 @@ const $enterDetails: TextStyle = {
     justifyContent:"center",
     color: colors.palette.red,
     paddingHorizontal: spacing.large,
-    width: 500,
-    fontSize: 15,
+    fontSize: 12,
   }
