@@ -14,6 +14,8 @@ interface ProfileProps {
     likes: number;
     dislikes: number;
     fav: number;
+    onPress: () => void;
+    onPress2: () => void;
   }
   
 
@@ -22,6 +24,8 @@ export const ProfileFriendInfo : React.FC<ProfileProps>= ({
     likes,
     dislikes,
     fav,
+    onPress,
+    onPress2,
 }) => (
     <View>
       <View style={{ flexDirection: "row" }}>
@@ -41,7 +45,7 @@ export const ProfileFriendInfo : React.FC<ProfileProps>= ({
             alignItems: "center",
             margin: 5,
           }}
-          onPress={() => Alert.alert("Voir mes amis")}
+          onPress={onPress}
         >
           <Text style={{ color: colors.palette.black, fontSize:12 }}>Voir mes amis</Text>
         </TouchableOpacity>
@@ -70,7 +74,7 @@ export const ProfileFriendInfo : React.FC<ProfileProps>= ({
             alignItems: "center",
             margin: 5,
           }}
-          onPress={() => Alert.alert("Voir mes films")}
+          onPress={onPress2}
         >
           <Text style={{ color: colors.palette.black, fontSize:12 }}>Mes films</Text>
         </TouchableOpacity>

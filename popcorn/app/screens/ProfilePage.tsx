@@ -16,6 +16,9 @@ import { ProfileFriendInfo } from "./profilePageComponent/ProfileFriendInfo";
 import { ProfileDescription } from "./profilePageComponent/Description";
 import { ProfilePersonal } from "./profilePageComponent/PersonalInfo";
 import { handleNavigateToModification } from "../utils/GoModificationProfilePage";
+import { handleNavigateToMyFriends } from "../utils/GoMyFriends";
+import { handleNavigateToMyMovies } from "../utils/GoMyMovies";
+
 
 
 
@@ -29,7 +32,6 @@ interface ProfilePageProps extends AppStackScreenProps<"Profile"> {}
 export const ProfilePage: FC<ProfilePageProps> = observer(function ProfilePage(
   _props
 ) {
-
 
   return (
     <View style={{ flex: 1 }}>
@@ -82,6 +84,8 @@ export const ProfilePage: FC<ProfilePageProps> = observer(function ProfilePage(
               likes={profile.likes}
               dislikes={profile.dislikes}
               amis={profile.amis}
+              onPress={() =>handleNavigateToMyFriends(_props)}
+              onPress2={() => handleNavigateToMyMovies(_props)}
             />
           ))}
         {LoggedProfile.map((profile, index) => (

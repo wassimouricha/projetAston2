@@ -106,6 +106,8 @@ const AppStack = observer(function AppStack() {
           <Stack.Screen name="Welcome" component={WelcomeScreen} />
           <Stack.Screen name="CardDetailScreen" component={CardDetailScreen} />
           <Stack.Screen name="ModificationProfilePage" component={ModificationProfilePage}  />
+          <Stack.Screen name="Friends" component={FriendsPage}  />
+          <Stack.Screen name="Favoris" component={FavPage}  />
           <Stack.Screen name="Demo" component={DemoNavigator} />
         </>
       ) : (
