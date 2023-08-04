@@ -1,8 +1,9 @@
 import React from 'react';
-import { View, ViewStyle, Image, ImageBackground, TouchableOpacity , ImageSourcePropType} from 'react-native';
+import { View, ViewStyle, Image, ImageBackground, TouchableOpacity , ImageSourcePropType, Alert} from 'react-native';
 import { Text } from '../../components';
 import { colors } from '../../theme';
 import { ScrollView } from 'react-native-gesture-handler';
+import { FilmILike } from '../../data/filmData';
 
 
 const CardDetailScreen = ({ route , navigation}) => {  {/*En ajoutant navigation aux props de la composante, on peut maintenant utiliser navigation.goBack()*/}
@@ -11,6 +12,24 @@ const CardDetailScreen = ({ route , navigation}) => {  {/*En ajoutant navigation
   const heart = require("../../../assets/icons/blackheart.png")
   const popcorn = require("../../../assets/images/popcorn.png")
   const bookmark = require("../../../assets/images/bookmarks.png")
+
+    // Fonction pour ajouter le film dans FilmILike
+    const addFilmToLiked = () => {
+      FilmILike.push({
+        titre,
+        annee,
+        affiche,
+        duree,
+        genre,
+        synopsis,
+        realisateur,
+        distributions,
+      });
+      // Vous pouvez ajouter ici une logique pour indiquer à l'utilisateur que le film a été ajouté aux favoris
+      Alert.alert("Film ajouté aux favoris")
+      console.log("FilmILike:", FilmILike);
+    };
+
   return (
     <ScrollView style={$scrollViewing}>
     <View style={$screenContentContainer}>
@@ -22,7 +41,7 @@ const CardDetailScreen = ({ route , navigation}) => {  {/*En ajoutant navigation
         <TouchableOpacity style={$returnButton}  onPress={() => navigation.goBack()}>{/* Utiliser onPress pour revenir à l'écran précédent */}
           <Image source={backArrrow}  style={{ height: 25, width:25, marginTop:12 , marginRight:5 , alignItems:'center'}}></Image>
         </TouchableOpacity>
-        <TouchableOpacity style={$LikeButton} >
+        <TouchableOpacity style={$LikeButton} onPress={addFilmToLiked}>
           <Image source={heart}  style={{ height: 35, width:35, marginTop:5 , alignItems:'center' , tintColor:colors.palette.green}}></Image>
         </TouchableOpacity>
         </View>
