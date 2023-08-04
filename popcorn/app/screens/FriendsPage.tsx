@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite"
-import React, { FC, useState,} from "react"
+import React, { FC, useEffect, useState,} from "react"
 import { TextStyle, ViewStyle , Image, ImageStyle, View, ScrollView,  ImageSourcePropType, TextInput} from "react-native"
 import { Screen, Text, } from "../components"
 import { colors, spacing } from "../theme"
@@ -18,20 +18,25 @@ const loggedName = "Thierry"
 export const FriendsPage: FC<FriendsPageProps> = observer(function FriendsPage(_props) {
   // Fonction de recherche d'amis
   const [searchText, setSearchText] = useState("");
-  const filteredFriends = Friends.filter((friend) =>
-  // la recherche est insensible à la casse ce qui veut dire que si on tape "a" ou "A" on aura le même résultat
-  friend.prenom.toLowerCase().includes(searchText.toLowerCase())
-);
+  const [filteredFriends, setFilteredFriends] = useState(Friends);
 
-  const [friendsList, setFriendsList] = useState(Friends);
+  // Filtrer les amis lorsque le texte de recherche change
+  useEffect(() => {
+    const updatedFriends = Friends.filter((friend) =>
+      friend.prenom.toLowerCase().includes(searchText.toLowerCase())
+    );
+    setFilteredFriends(updatedFriends);
+  }, [searchText]);
+
+
   // Nouvelle fonction pour gérer la suppression d'un ami
   const handleRemoveFriend = (id: number) => {
-    // Supprimer l'ami de la liste en filtrant les amis avec l'ID différent de celui qui doit être supprimé
-    const updatedFriendsList = friendsList.filter((friend) => friend.id !== id);
-    setFriendsList(updatedFriendsList);
+    // Supprimer l'ami de la liste filtrée
+    const updatedFilteredFriends = filteredFriends.filter((friend) => friend.id !== id);
+    setFilteredFriends(updatedFilteredFriends);
+
     console.log("Ami avec ID", id, "supprimé");
   };
-  
 
   return (
     <Screen
