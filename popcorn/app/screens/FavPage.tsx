@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite"
 import React, { FC,} from "react"
-import { TextStyle, ViewStyle , Image, ImageStyle, ImageBackground, View, ScrollView,  ImageSourcePropType} from "react-native"
+import { TextStyle, ViewStyle , Image, ImageStyle, View, ScrollView,  ImageSourcePropType} from "react-native"
 import { Screen, Text, } from "../components"
 import { colors, spacing } from "../theme"
 import { isRTL } from "../i18n"
@@ -10,12 +10,11 @@ import { FilmILike , SeriesILike } from "../data/filmData"
 
 
 
+
+
 interface FavPageProps  extends AppStackScreenProps<"Favoris"> {titre?: string; annee?: string;}
 
-
-
-export const FavPage: FC<FavPageProps> = observer(function FavPage(_props) {
-
+export const FavPage: FC<FavPageProps> = observer(function FavPage(_props){
     // Attention pour l'instant cela ne fonctionne que lorsque l'on est non connecté
     function GoCardDetail(titre: string, annee: string , duree:string , genre:string ,affiche: ImageSourcePropType , synopsis: string , realisateur: string , distributions: string) {
       console.log("CardDetail");
@@ -77,6 +76,7 @@ export const FavPage: FC<FavPageProps> = observer(function FavPage(_props) {
     </Screen>
   )
 })
+
 
 const $screenContentContainer: ViewStyle = {
   display:"flex",

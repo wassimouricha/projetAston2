@@ -1,11 +1,15 @@
 import { observer } from "mobx-react-lite"
-import React, { FC, useState,} from "react"
+import React, { FC, useEffect, useState,} from "react"
 import { TextStyle, ViewStyle , Image, ImageStyle, ImageBackground, View, ScrollView, TextInput, Touchable, TouchableOpacity, Alert, ImageSourcePropType} from "react-native"
 import {  Button, Screen, Text, } from "../components"
 import { colors, spacing } from "../theme"
 import { isRTL } from "../i18n"
 import { AppStackScreenProps } from "../navigators/AppNavigator"
-import { films, series, FilmMayLike } from "../data/filmData"
+import {
+  getMoviesData,
+  getSeriesData,
+  getFilmMayLikeData,
+} from "../data/filmData";
 import { FilmItem, FilmMayLikeItem } from "./homePageComponent/FilmSeriesComponents"
 import { GoCardDetail } from "../utils/GoCardDetail"
 
@@ -16,6 +20,29 @@ const thierry = require("../../assets/images/thierry.jpg")
 
 
 export const HomePage: FC<HomePageProps> = observer(function HomePage(_props) {
+
+  const [films, setFilms] = useState([]); // État pour stocker les films
+  const [series, setSeries] = useState([]); // État pour stocker les séries
+  const [filmMayLike, setFilmMayLike] = useState([]); // État pour stocker les films recommandés
+
+  useEffect(() => {
+    // Récupérez les données des films
+    getMoviesData()
+      .then((data) => setFilms(data))
+      .catch((error) => console.error("Erreur lors de la récupération des données de films :", error));
+
+    // Récupérez les données des séries
+    getSeriesData()
+      .then((data) => setSeries(data))
+      .catch((error) => console.error("Erreur lors de la récupération des données de séries :", error));
+
+    // Récupérez les données des films recommandés
+    getFilmMayLikeData()
+      .then((data) => setFilmMayLike(data))
+      .catch((error) =>
+        console.error("Erreur lors de la récupération des données de films recommandés :", error)
+      );
+  }, []);
 
   const loggedName = "Thierry"
   // état local pour stocker la valeur de recherche dans le composant
@@ -130,7 +157,7 @@ export const HomePage: FC<HomePageProps> = observer(function HomePage(_props) {
 
                       {/* Composant de scrolling horizontal contenant mes cartes des sorties de la semaine */}
                       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                    {FilmMayLike.map((film, index) => (
+                    {filmMayLike.map((film, index) => (
                       <FilmMayLikeItem
                         key={index}
                         affiche={film.affiche}
