@@ -132,13 +132,7 @@ export const FilmMayLikeItem: React.FC<FilmMayLikeItemProps> = ({
 
 export const FilmILikeItem: React.FC<FilmMayLikeItemProps> = ({ 
   affiche,
-  genre,
-  annee,
-  duree,
   titre,
-  synopsis,
-  realisateur,
-  distributions,
   onPress,
 }) => (
   

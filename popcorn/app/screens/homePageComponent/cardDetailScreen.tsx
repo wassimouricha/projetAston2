@@ -12,6 +12,7 @@ const CardDetailScreen = ({ route , navigation}) => {  {/*En ajoutant navigation
   const heart = require("../../../assets/icons/blackheart.png")
   const popcorn = require("../../../assets/images/popcorn.png")
   const bookmark = require("../../../assets/images/bookmarks.png")
+  const x = require("../../../assets/icons/x.png")
 
     // Fonction pour ajouter le film dans FilmILike
     const addFilmToLiked = () => {
@@ -47,7 +48,7 @@ const CardDetailScreen = ({ route , navigation}) => {  {/*En ajoutant navigation
         </View>
         <View style={ $buttonContainerOnlyRight}>
         <TouchableOpacity style={$DisLikeButton} >
-          <Image source={backArrrow}  style={{ height: 25, width:25, marginTop:12 , marginRight:5 , alignItems:'center'}}></Image>
+          <Image source={x}  style={{ height: 40, width:40 , marginTop:3,alignItems:'center' , tintColor:colors.palette.red}}></Image>
         </TouchableOpacity>
         </View>
 
