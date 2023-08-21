@@ -8,6 +8,7 @@ import { AppStackScreenProps } from "../navigators/AppNavigator"
 
 import { Friends } from "../data/friendsData"
 import { FriendsItem } from "./friendsPageComponent/friendsComponent"
+import { handleNavigateToFriendsProfile } from "../utils/GoFriendsProfilePage"
 
 
 
@@ -93,8 +94,7 @@ export const FriendsPage: FC<FriendsPageProps> = observer(function FriendsPage(_
                         mail={friend.mail}
                         statut={friend.statut}
                         pays={friend.pays}
-                        onPress={() => (console.log("ok")
-                                )}   
+                        onPress={() => handleNavigateToFriendsProfile(_props, friend.id)}   
                         onPressRemove={handleRemoveFriend} // Passage de la fonction pour gérer la suppression d'un ami
                         />
                     ))}
