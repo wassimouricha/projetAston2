@@ -68,12 +68,10 @@ export const FriendsProfilePage: FC<FriendsProfilePageProps> = observer(function
         >
      
             <ProfilePicContainer
-      
               nom={friend.nom}
               prenom={friend.prenom}
               statut={friend.statut}
               photo={friend.photo}
-      
               onPress={() =>
                 console.log("ok")
               }
@@ -90,24 +88,21 @@ export const FriendsProfilePage: FC<FriendsProfilePageProps> = observer(function
               likes={profile.likes}
               dislikes={profile.dislikes}
               amis={profile.amis}
-              onPress={() =>console.log("ok")}
               onPress2={() => console.log("ok")}
             />
           ))}
-        {LoggedProfile.map((profile, index) => (
+
             <ProfileDescription
-            key={index}
-              description={profile.description}
+              description={friend.description}
             />
-          ))}
-        {LoggedProfile.map((profile, index) => (
+
+
             <ProfilePersonal
-              key={index}
-              mail={profile.mail}
-              age={profile.age}
-              adresse={profile.adresse}
+              mail={friend.mail}
+              age={friend.age}
+              adresse={friend.pays}
             />
-          ))}
+
         </View>
       </ScrollView>
     </View>

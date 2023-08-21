@@ -14,8 +14,8 @@ interface ProfileProps {
     likes: number;
     dislikes: number;
     fav: number;
-    onPress: () => void;
-    onPress2: () => void;
+    onPress?: () => void;
+    onPress2?: () => void;
   }
   
 
@@ -36,6 +36,7 @@ export const ProfileFriendInfo : React.FC<ProfileProps>= ({
         <Text preset="subheading" style={{ marginLeft: 5, fontSize: 12 }}>
           Amis : {amis}
         </Text>
+        {onPress && (
         <TouchableOpacity
           style={{
             height: 30,
@@ -47,8 +48,11 @@ export const ProfileFriendInfo : React.FC<ProfileProps>= ({
           }}
           onPress={onPress}
         >
-          <Text style={{ color: colors.palette.black, fontSize:12 }}>Voir mes amis</Text>
+          <Text style={{ color: colors.palette.black, fontSize: 12 }}>
+            Voir mes amis
+          </Text>
         </TouchableOpacity>
+      )}
         <Image
           source={bookmark}
           style={{ height: 30, width: 40, marginTop: 5, tintColor: colors.palette.red }}
