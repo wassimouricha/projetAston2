@@ -19,7 +19,7 @@ export const loadingSignInScreen: FC<loadingSignInScreenProps> = observer(functi
   useEffect(() => {
  setTimeout(() => {
     // Naviguer vers la page suivante
-    console.log("LoginPage")
+    console.log("LoginPape")
     _props.navigation.navigate("Login")
   }, 3000); // 3000ms = 3 secondes
   }, [])
