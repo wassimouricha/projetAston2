@@ -81,16 +81,7 @@ export const FriendsProfilePage: FC<FriendsProfilePageProps> = observer(function
       </ImageBackground>
       <ScrollView style={{ flex: 1 }}>
         <View style={{ zIndex: -20, marginTop: 80 }}>
-        {LoggedProfile.map((profile, index) => (
-            <ProfileFriendInfo
-              key={index}
-              fav={profile.fav}
-              likes={profile.likes}
-              dislikes={profile.dislikes}
-              amis={profile.amis}
-              onPress2={() => console.log("ok")}
-            />
-          ))}
+
 
             <ProfileDescription
               description={friend.description}
