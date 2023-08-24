@@ -49,7 +49,7 @@ export const ProfilePersonal : React.FC<ProfileProps>= ({
         />
 
         <Text style={{ marginLeft: 5, fontSize: 13, }}>
-           Adresse : {adresse}
+           Adresse ou Pays : {adresse}
         </Text>
         </View>
     </View>

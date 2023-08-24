@@ -7,7 +7,7 @@ interface ProfileProps {
   prenom: string;
   statut: string;
   photo: ImageSourcePropType;
-  textInButton: string;
+  textInButton?: string;
   onPress: () => void;
 }
 
@@ -49,14 +49,20 @@ export const ProfilePicContainer: React.FC<ProfileProps> = ({
     <Text style={{color:colors.palette.gray}}>
           {statut}
         </Text>
+        {textInButton ? (
         <Button
-        testID="modify-button"
-        text={textInButton}
-        style={$tapButton}
-        textStyle={{color: colors.palette.black, fontSize: 18, fontWeight: "bold"}}
-        preset="reversed"
-        onPress={onPress}
-      />
+          testID="modify-button"
+          text={textInButton}
+          style={$tapButton}
+          textStyle={{
+            color: colors.palette.black,
+            fontSize: 18,
+            fontWeight: "bold",
+          }}
+          preset="reversed"
+          onPress={onPress}
+        />
+      ) : null}
       </View>
     </View>
 );

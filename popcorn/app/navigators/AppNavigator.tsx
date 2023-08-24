@@ -21,6 +21,7 @@ import {
   FavPage,
   FriendsPage,
   ProfilePage,
+  FriendsProfilePage,
   ModificationProfilePage,
   FirstScreen,
   HomePage, 
@@ -32,6 +33,9 @@ import {
 import { DemoNavigator, TabParamList, } from "./MenuNavigator" // @demo remove-current-line
 import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
 import CardDetailScreen from "../screens/homePageComponent/CardDetailScreen"
+
+
+
 
 
 
@@ -55,6 +59,18 @@ export type AppStackParamList = {
   Login: undefined 
   Favoris: undefined
   Profile: undefined
+  FriendsProfilePage: {
+    id?: number;
+    photo?: ImageSourcePropType;
+    nom?: string;
+    prenom?: string;
+    description?: string;
+    mail?: string;
+    age?: number;
+    pays?: string;
+    statut?: string;
+
+  };
   ModificationProfilePage: undefined
   Friends: undefined
   CardDetailScreen: { 
@@ -107,6 +123,7 @@ const AppStack = observer(function AppStack() {
           <Stack.Screen name="CardDetailScreen" component={CardDetailScreen} />
           <Stack.Screen name="ModificationProfilePage" component={ModificationProfilePage}  />
           <Stack.Screen name="Friends" component={FriendsPage}  />
+          <Stack.Screen name="FriendsProfilePage" component={FriendsProfilePage}  />
           <Stack.Screen name="Favoris" component={FavPage}  />
           <Stack.Screen name="Demo" component={DemoNavigator} />
         </>

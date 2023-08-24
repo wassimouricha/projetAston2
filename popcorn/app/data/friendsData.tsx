@@ -1,17 +1,19 @@
 import { ImageSourcePropType } from "react-native";
 
+export interface FriendsProfile {
+  id?: number;
+  photo?: ImageSourcePropType;
+  nom?: string;
+  prenom?: string;
+  description?: string;
+  mail?: string;
+  age?: string;
+  pays?: string;
+  statut?: string;
+}
+
 export const Friends = [
-    {
-      id: 1,
-      photo: require("../../assets/images/thierry.jpg") as ImageSourcePropType ,
-      nom: "Henry",
-      prenom: "Thierry",
-      description: "Grande légende du football",
-      mail: "titi@gmail.com",
-      age: "50 ans",
-      pays: "France",
-      statut: "Légende",
-    },
+
     {
       id: 2,
       photo: require("../../assets/images/dede.jpg") as ImageSourcePropType ,
