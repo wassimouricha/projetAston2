@@ -67,9 +67,11 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
     // On traite la réponse de la requête
     .then(response => {
       if (response.status === 200) {
-        const token = response.data.token;
+        const token :string = response.data.token;
         // On stocke le token d'authentification dans la session
         setAuthToken(token);
+        // On redirige l'utilisateur vers la page d'accueil
+        _props.navigation.navigate("Home");
       }
       else {
         console.log(response.data.message);
