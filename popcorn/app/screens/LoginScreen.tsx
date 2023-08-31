@@ -6,6 +6,8 @@ import { useStores } from "../models"
 import { AppStackScreenProps } from "../navigators"
 import { colors, spacing } from "../theme"
 import { isRTL } from "../i18n"
+import axios from 'axios';
+import { set } from "date-fns"
 
 
 
@@ -33,26 +35,53 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
   useEffect(() => {
     // Here is where you could fetch credentials from keychain or storage
     // ici je pré-remplis les inputs 
-    setAuthEmail("wassim.bouricha@popcorn.fr")
-    setAuthPassword("wassim")
+    setAuthEmail("Oppenheimer")
+    setAuthPassword("Projet Manhattan")
   }, [])
 
   const errors: typeof validationErrors = isSubmitted ? validationErrors : ({} as any)
 
+  /**
+   * Gère la tentative de connexion de l'utilisateur en appelant la fonction connexionAPI.
+   * Réinitialise les champs d'authentification et met à jour le nombre de tentatives.
+   */
   const handleLogin = async () => {
-
     setIsSubmitted(true)
     setAttemptsCount(attemptsCount + 1)
-
-    // fait une requete au serveur afin d'avoir le token d'authentification
-    // si ok , reset les champs et donne le token
+    connexionAPI();
     setIsSubmitted(false)
     setAuthPassword("")
     setAuthEmail("")
-
-    // pour l'instant c'est un fake token.
-    setAuthToken(String(Date.now()))
   }
+
+  /**
+   * Appelle l'API sur la methode de connexion avec les identifiants de l'utilisateur.
+   * @param {string} username - Le nom d'utilisateur de l'utilisateur.
+   * @param {string} password - Le mot de passe de l'utilisateur
+   * */
+  const connexionAPI = async () => {
+    await axios.post('http://0.0.0.0:80/api/user/connexion', {
+      username: authEmail,
+      password: authPassword,
+    })
+    // On traite la réponse de la requête
+    .then(response => {
+      if (response.status === 200) {
+        const token :string = response.data.token;
+        // On stocke le token d'authentification dans la session
+        setAuthToken(token);
+        // On redirige l'utilisateur vers la page d'accueil
+        _props.navigation.navigate("Profile");
+      }
+      else {
+        console.log(response.data.message);
+      }
+    })
+    .catch(error => {
+      // On affiche un message d'erreur à l'utilisateur
+      console.log(error);
+    });
+  };
 
   // pour afficher mon icone droit de mot de passe
   const PasswordRightAccessory = useMemo(
@@ -109,7 +138,6 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
   }, [])
 
   function GoFirst() {
-    console.log("firstPAGE")
     _props.navigation.navigate("First")
   }
 
@@ -129,7 +157,7 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
         onChangeText={setAuthEmail}
         containerStyle={$textField}
         inputWrapperStyle={$ContainertextField}
-        label="Adresse E-mail"
+        label="Username"
         autoCapitalize="none"
         autoComplete="email"
         autoCorrect={false}

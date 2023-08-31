@@ -16,7 +16,7 @@ export const AuthenticationStoreModel = types
       return {
         authEmail: (function () {
           if (store.authEmail.length === 0) return "ne peut pas etre vide"
-          if (store.authEmail.length < 6) return "l'adresse mail doit etre de 6 caractères minimum"
+          if (store.authEmail.length < 6) return "l'username doit etre de 6 caractères minimum"
           if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(store.authEmail))
             return "must be a valid email address"
           return ""

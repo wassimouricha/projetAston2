@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
-import { AppStackScreenProps } from "../navigators/AppNavigator";
+import { AppStackScreenProps } from "../navigators";
 import { ProfilePicContainer } from "./profilePageComponent/ProfilePicContainer";
 import { LoggedProfile } from "../data/loggedProfileData";
 import { ScrollView } from "react-native-gesture-handler";
@@ -18,20 +18,47 @@ import { ProfilePersonal } from "./profilePageComponent/PersonalInfo";
 import { handleNavigateToModification } from "../utils/GoModificationProfilePage";
 import { handleNavigateToMyFriends } from "../utils/GoMyFriends";
 import { handleNavigateToMyMovies } from "../utils/GoMyMovies";
-
-
-
+import { useStores } from "../models";
+import axios from 'axios';
 
 
 const background = require("../../assets/images/background.png");
 const logout = require("../../assets/images/logout.png");
 
+
 interface ProfilePageProps extends AppStackScreenProps<"Profile"> {}
-
-
 export const ProfilePage: FC<ProfilePageProps> = observer(function ProfilePage(
   _props
 ) {
+  const { navigation } = _props;
+  const token = useStores().authenticationStore.authToken;
+/**
+ * Appelle l'API sur la methode de deconnexion avec le token
+ * @param {string} token - Le token de l'utilisateur
+ */
+  const deconnexion = () => {
+    axios.post('http://0.0.0.0:80/api/user/deconnexion', {}, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    // On traite la réponse de la requête
+    .then(response => {
+      // Si la requête est un succès, on affiche un message à l'utilisateur et on le redirige vers la page de connexion
+      if (response.status === 200) {
+        console.log('Déconnexion réussie');
+        navigation.navigate("Login");
+      }
+      // Si la requête est un échec, on affiche un message à l'utilisateur
+      else {
+        console.log('Déconnexion échouée');
+      }
+    })
+    .catch(error => {
+      // On affiche un message d'erreur à l'utilisateur
+      console.log(error);
+    });
+  };
 
   return (
     <View style={{ flex: 1 }}>
@@ -42,7 +69,7 @@ export const ProfilePage: FC<ProfilePageProps> = observer(function ProfilePage(
         <View style={$buttonContainerOnlyRight}>
           <TouchableOpacity
             style={$DisLikeButton}
-            onPress={() => Alert.alert("Se déconnecter")}
+            onPress={deconnexion}
           >
             <Image
               source={logout}

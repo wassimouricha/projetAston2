@@ -5,7 +5,6 @@ import {  Screen, Text  } from "../components"
 import { AppStackScreenProps } from "../navigators"
 import { colors, spacing } from "../theme"
 import { isRTL } from "../i18n"
-import  Gif  from 'react-native-gif';
 
 
 
@@ -33,9 +32,9 @@ export const loadingSignInScreen: FC<loadingSignInScreenProps> = observer(functi
       safeAreaEdges={["top", "bottom"]}
     >
       
-        <Gif source={popgif} style={{ width: '100%', height: 200 }} />
+        <Image source={popgif} style={{ width: '100%', height: 200 }} />
         <Image style={$signupLogo} source={popcornlogo} resizeMode="contain"  />
-        <Gif source={loadinggif} style={{ width: '100%', height: 100 }} />
+        <Image source={loadinggif} style={{ width: '100%', height: 100 }} />
         <Text text="Chargement de la page de connexion"   preset="subheading" style={$enterDetails} />
 
     </Screen>
