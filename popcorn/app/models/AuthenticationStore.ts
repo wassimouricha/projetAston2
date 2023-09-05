@@ -7,6 +7,7 @@ export const AuthenticationStoreModel = types
     authEmail: "",
     authPassword: "",
     confirmAuthPassword: "",
+    authPseudo: "",
   })
   .views((store) => ({
     get isAuthenticated() {
@@ -15,19 +16,24 @@ export const AuthenticationStoreModel = types
     get validationErrors() {
       return {
         authEmail: (function () {
-          if (store.authEmail.length === 0) return "ne peut pas etre vide"
-          if (store.authEmail.length < 6) return "l'username doit etre de 6 caractères minimum"
+          if (store.authEmail.length === 0) return "L'email ne peut pas etre vide"
+          if (store.authEmail.length < 6) return "Lemail doit etre de 6 caractères minimum"
           if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(store.authEmail))
-            return "must be a valid email address"
+            return "L'email n'est pas valide"
           return ""
         })(),
         authPassword: (function () {
-          if (store.authPassword.length === 0) return "ne peut pas etre vide"
-          if (store.authPassword.length < 6) return "le mot de passe doit etre de 6 caractères minimum"
+          if (store.authPassword.length === 0) return "Le mot de passe peut pas etre vide"
+          if (store.authPassword.length < 6) return "Le mot de passe doit etre de 6 caractères minimum"
           return ""
         })(),
         confirmAuthPassword: (function () {
           if (store.confirmAuthPassword != store.authPassword) return "Le mot de passe ne correspond pas"
+          return ""
+        })(),
+        authPseudo: (function () {
+          if (store.authPseudo.length === 0) return "Le pseudo ne peut pas etre vide"
+          if (store.authPseudo.length < 6) return "Le pseudo doit etre de 6 caractères minimum"
           return ""
         })(),
       }
@@ -45,6 +51,9 @@ export const AuthenticationStoreModel = types
     },
     setConfirmAuthPassword(value: string) {
       store.confirmAuthPassword = value.replace(/ /g, "")
+    },
+    setAuthPseudo(value: string) {
+      store.authPseudo = value.replace(/ /g, "")
     },
     logout() {
       store.authToken = undefined

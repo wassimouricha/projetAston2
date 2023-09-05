@@ -6,6 +6,8 @@ import { useStores } from "../models"
 import { AppStackScreenProps } from "../navigators"
 import { colors, spacing } from "../theme"
 import { isRTL } from "../i18n"
+import axios from 'axios';
+import { set } from "date-fns"
 
 
 
@@ -29,6 +31,8 @@ export const RegisterScreen: FC<RegisterScreenProps> = observer(function Registe
       setConfirmAuthPassword,
       setAuthToken,
       validationErrors,
+      setAuthPseudo,
+      authPseudo
     },
   } = useStores()
 
@@ -41,16 +45,40 @@ export const RegisterScreen: FC<RegisterScreenProps> = observer(function Registe
 
     if (Object.values(validationErrors).some((v) => !!v)) return
 
+    axios.post('http://0.0.0.0:80/api/user/inscription', {
+      email: authEmail,
+      username: authPseudo,
+      password: authPassword,
+      password_confirmation: confirmAuthPassword,
+    })
+    .then(response => {
+      console.log(response.status);
+      if (response.status == 201) {
+        alert('Inscription réussie');
+        setAuthToken(response.data.token);
+        _props.navigation.navigate("Home");
+      }
+      else {
+        console.log('Inscription échouée');
+      }
+    })
+    .catch(error => {
+      console.log(error);
+      alert(error.response.data.message);
+    });
+    
+
     // fait une requete au serveur afin d'avoir le token d'authentification
     // si ok , reset les champs et donne le token
     setIsSubmitted(false)
     setAuthPassword("")
+    setConfirmAuthPassword("")
+    setAuthPseudo("")
     setAuthEmail("")
 
     // pour l'instant c'est un fake token.
-    setAuthToken(String(Date.now()))
+    
   }
-
   // pour afficher mon icone droit de mot de passe
   const PasswordRightAccessory = useMemo(
     () =>
@@ -139,6 +167,8 @@ export const RegisterScreen: FC<RegisterScreenProps> = observer(function Registe
       />
       
       <TextField
+        value={authPseudo}
+        onChangeText={setAuthPseudo}
         containerStyle={$textField}
         inputWrapperStyle={$ContainertextField}
         label="Pseudo"
@@ -146,32 +176,11 @@ export const RegisterScreen: FC<RegisterScreenProps> = observer(function Registe
         autoCorrect={false}
         keyboardType="default"
         placeholderTx="registerScreen.pseudoFieldPlaceholder"
-        LeftAccessory={ EmailLeftAccessory }
-      />
-
-      <TextField
-        containerStyle={$textField}
-        inputWrapperStyle={$ContainertextField}
-        label="Age"
-        autoCapitalize="none"
-        autoCorrect={false}
-        keyboardType="numeric"
-        placeholderTx="registerScreen.ageFieldPlaceholder"
+        helper={errors?.authPseudo}
+        status={errors?.authPseudo ? "error" : undefined}
         LeftAccessory={ EmailLeftAccessory }
       />
       
-      <TextField
-        containerStyle={$textField}
-        inputWrapperStyle={$ContainertextField}
-        label="Adresse"
-        autoCapitalize="none"
-        autoCorrect={false}
-        keyboardType="default"
-        placeholderTx="registerScreen.adresseFieldPlaceholder"
-        LeftAccessory={ EmailLeftAccessory }
-      />
-      
-
       <TextField
         ref={authPasswordInput}
         value={authPassword}

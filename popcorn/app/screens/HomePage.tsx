@@ -63,7 +63,9 @@ export const HomePage: FC<HomePageProps> = observer(function HomePage(_props) {
     >
           <View style={{ marginTop: 20 }}>
   <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+  <TouchableOpacity onPress={() => _props.navigation.navigate("Profile")}>
     <Image source={thierry} style={{ height: 70, width: 70, marginRight: 10, borderRadius: 40, marginLeft: 60 }} />
+  </TouchableOpacity>
     <View>
       <Text preset="subheading" style={{ width: 300 }}>
         Salut{" "}

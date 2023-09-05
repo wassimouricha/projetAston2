@@ -60,25 +60,30 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
    * @param {string} password - Le mot de passe de l'utilisateur
    * */
   const connexionAPI = async () => {
+    if(authEmail === "" || authPassword === "") {
+      alert("Veuillez remplir tous les champs");
+      return;
+    }
     await axios.post('http://0.0.0.0:80/api/user/connexion', {
       username: authEmail,
       password: authPassword,
     })
     // On traite la réponse de la requête
     .then(response => {
-      if (response.status === 200) {
+      if (response.status == 200) {
         const token :string = response.data.token;
         // On stocke le token d'authentification dans la session
         setAuthToken(token);
         // On redirige l'utilisateur vers la page d'accueil
-        _props.navigation.navigate("Profile");
+        _props.navigation.navigate("Home");
       }
       else {
-        console.log(response.data.message);
+          alert("Mauvais identifiants/mot de passe");
       }
     })
     .catch(error => {
       // On affiche un message d'erreur à l'utilisateur
+      alert("Mauvais identifiants/mot de passe");
       console.log(error);
     });
   };
