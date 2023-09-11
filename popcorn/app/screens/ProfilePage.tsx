@@ -47,7 +47,7 @@ export const ProfilePage: FC<ProfilePageProps> = observer(function ProfilePage(
       // Si la requête est un succès, on affiche un message à l'utilisateur et on le redirige vers la page de connexion
       if (response.status === 200) {
         console.log('Déconnexion réussie');
-        navigation.navigate("Login");
+        navigation.navigate("First");
       }
       // Si la requête est un échec, on affiche un message à l'utilisateur
       else {
