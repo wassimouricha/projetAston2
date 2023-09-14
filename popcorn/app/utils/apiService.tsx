@@ -123,4 +123,51 @@ export const fetchFilmMayLikeDetails = async (movieId: number) => {
       throw error;
     }
   };
+
+  // Fonction pour effectuer des requêtes GET à l'API themoviedb pour le swipe
+export const fetchMoviesForSwipe = async (endpoint: string, params?: any) => {
+  try {
+    const response = await axios.get(`${baseURL}/${endpoint}`, {
+      params: {
+        api_key: apiKey,
+        language: "fr-FR",
+        page: 1,
+        ...params
+      }
+    });
+    return response.data.results;
+  } catch (error) {
+    console.error("Erreur lors de la récupération des données :", error);
+    throw error;
+  }
+};
+
+export const suggestMovie = async (endpoint: string, params?: any) => {
+  try {
+    // Requête à l'API TMDb pour obtenir un film en adéquation avec les genres likés
+    const response = await axios.get(`${baseURL}/${endpoint}` ,
+      {
+        params: {
+          api_key: apiKey,
+          language: 'fr-FR',
+          sort_by: 'popularity.desc',
+          with_genres: params,
+          page: 1,
+        },
+      }
+    );
+
+    if (response.data.results.length > 0) {
+      
+      // Retournez le film suggéré
+      return response.data.results;
+    } else {
+      console.log('Aucun film suggéré trouvé.');
+      return null;
+    }
+  } catch (error) {
+    console.error('Erreur lors de la suggestion de film :', error);
+    return null;
+  }
+};
   
