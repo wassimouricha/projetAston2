@@ -55,8 +55,9 @@ export const SwipePage: FC<SwipePageProps> = observer(function SwipePage(
   const handleReloadPress = () => {
     setCurrentIndex(0);
     setSuggestedMovie(null);
+    const randomNum = Math.floor(Math.random() * 20) + 1;
     getMoviesDataForSwipe()
-      .then((data) => setMovies(data.slice(0, NUMBER_OF_MOVIES)))
+      .then((data) => setMovies(data.slice(randomNum, randomNum+NUMBER_OF_MOVIES)))
   };
 
   function findMostGenreId(movies: any[]): any | undefined {
@@ -101,6 +102,7 @@ export const SwipePage: FC<SwipePageProps> = observer(function SwipePage(
           <View style={styles.containerSuggestedMovie}>
             <Image source={suggestedMovie.affiche} style={styles.poster} />
             <Text style={styles.title}>{suggestedMovie.titre}</Text>
+            <Text style={styles.duration}>Note moyenne : {suggestedMovie.note}/10</Text>
             <Text style={styles.duration}>Durée : {suggestedMovie.duree}</Text>
             <Text style={styles.synopsis}>Synopsis : {suggestedMovie.synopsis}</Text>
             <Text style={styles.director}>Réalisateur : {suggestedMovie.realisateur}</Text>

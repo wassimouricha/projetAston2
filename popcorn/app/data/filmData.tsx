@@ -128,10 +128,11 @@ const getSuggestedFilm = async (genreID: any) => {
           synopsis: movie.overview,
           realisateur: movieDetails.director || "Inconnu",
           distributions: movieDetails.actors || "Inconnu",
+          note: movie.vote_average
         };
       })
     );
-    return suggestedFilm[0];
+    return suggestedFilm[Math.floor(Math.random() * 20) + 1];
   } catch (error) {
     console.error('Erreur lors de la récupération des données de films :', error);
     throw error;
