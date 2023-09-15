@@ -7,13 +7,13 @@ import {
   StyleSheet,
   Image,
   Text,
-  FlatList,
+  ScrollView,
+  ImageBackground,
+  TouchableOpacity,
 } from "react-native";
 import { AppStackScreenProps } from "../navigators/AppNavigator";
 import Swiper from "react-native-deck-swiper";
-import { getMoviesData, getMoviesDataForSwipe, getSuggestedFilm } from "../data/filmData";
-import { Card } from "../components/Card";
-import { suggestMovie } from "../utils/apiService";
+import { getMoviesDataForSwipe, getSuggestedFilm } from "../data/filmData";
 
 const background = require("../../assets/images/background.png");
 
@@ -26,7 +26,7 @@ export const SwipePage: FC<SwipePageProps> = observer(function SwipePage(
   const [movies, setMovies] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [likedMovies, setLikedMovies] = useState([]);
-  const [suggestedFilm, setSuggestedFilm] = useState(null);
+  const [suggestedMovie, setSuggestedMovie] = useState(null);
   const NUMBER_OF_MOVIES = 15;
 
   useEffect(() => {
@@ -47,35 +47,36 @@ export const SwipePage: FC<SwipePageProps> = observer(function SwipePage(
   const handleSipedAll = () => {
     const genresIDsArray = likedMovies.map(item => item.genresID).flat();
     const genreID = findMostGenreId(genresIDsArray);
-    console.log("ALL");
 
     getSuggestedFilm(genreID)
-      .then((data) => setSuggestedFilm(data))
-  }
+      .then((data) => setSuggestedMovie(data))
+  };
+
+  const handleReloadPress = () => {
+    setCurrentIndex(0);
+    setSuggestedMovie(null);
+    getMoviesDataForSwipe()
+      .then((data) => setMovies(data.slice(0, NUMBER_OF_MOVIES)))
+  };
 
   function findMostGenreId(movies: any[]): any | undefined {
     if (movies.length === 0) {
       return undefined; // Retourne undefined si le tableau est vide
     }
-
     const compteurOccurrences: { [cle: string]: number } = {};
-
     let mostGenreId: any = movies[0];
     let maxOccurrences = 1;
-
     for (const element of movies) {
       if (compteurOccurrences[element]) {
         compteurOccurrences[element]++;
       } else {
         compteurOccurrences[element] = 1;
       }
-
       if (compteurOccurrences[element] > maxOccurrences) {
         maxOccurrences = compteurOccurrences[element];
         mostGenreId = element;
       }
     }
-
     return mostGenreId;
   }
 
@@ -85,96 +86,106 @@ export const SwipePage: FC<SwipePageProps> = observer(function SwipePage(
   }
 
   if (currentIndex === NUMBER_OF_MOVIES) {
-    if (!suggestedFilm) {
+    if (!suggestedMovie) {
       return (
-        <View style={styles.container}>
+        <View style={styles.containerSwiper}>
           <Text>Chargement en cours...</Text>
         </View>
       );
     } else {
-      console.log(suggestedFilm.titre);
-
       return (
-        <View style={styles.container}>
-          <Image source={suggestedFilm.affiche} style={styles.poster} />
-          <Text style={styles.title}>{suggestedFilm.title}</Text>
-          <Text style={styles.duration}>Durée : {suggestedFilm.duree}</Text>
-          <Text style={styles.synopsis}>Synopsis : {suggestedFilm.synopsis}</Text>
-          <Text style={styles.director}>Réalisateur : {suggestedFilm.realisateur}</Text>
-          <Text style={styles.genre}>Genre : {suggestedFilm.genre}</Text>
-          <Text style={styles.actors}>Acteurs : {suggestedFilm.distributions}</Text>
-        </View>
+        <ScrollView>
+          <TouchableOpacity onPress={handleReloadPress} style={styles.reloadButton}>
+            <Text>Reload</Text>
+          </TouchableOpacity>
+          <View style={styles.containerSuggestedMovie}>
+            <Image source={suggestedMovie.affiche} style={styles.poster} />
+            <Text style={styles.title}>{suggestedMovie.titre}</Text>
+            <Text style={styles.duration}>Durée : {suggestedMovie.duree}</Text>
+            <Text style={styles.synopsis}>Synopsis : {suggestedMovie.synopsis}</Text>
+            <Text style={styles.director}>Réalisateur : {suggestedMovie.realisateur}</Text>
+            <Text style={styles.genre}>Genre : {suggestedMovie.genre}</Text>
+            <Text style={styles.actors}>Acteurs : {suggestedMovie.distributions}</Text>
+          </View>
+        </ScrollView>
       );
     }
   } else {
 
     return (
-      <View>
-        <Swiper
-          cards={movies}
-          renderCard={(movie) => (
-            <View style={styles.card}>
-              {movie ? (
-                <>
-                  <Image
-                    style={styles.cardImage}
-                    source={{ uri: movie.affiche.uri }}
-                  />
-                  <Text style={styles.titre}>{movie.titre}</Text>
-                  <Text style={styles.vote_average}>{movie.duree}</Text>
-                </>
-              ) : (
-                <Text>Loading...</Text>
+      <View style={{ flex: 1 }}>
+        <ImageBackground
+          source={background}
+          style={{ height: 650, alignItems: "flex-start", zIndex: 20 }}
+        >
+          <View style={styles.containerSwiper}>
+            <Swiper
+              cards={movies}
+              renderCard={(movie) => (
+                <View style={styles.card}>
+                  {movie ? (
+                    <>
+                      <Image
+                        style={styles.cardImage}
+                        source={{ uri: movie.affiche.uri }}
+                      />
+                      <Text style={styles.titre}>{movie.titre}</Text>
+                      <Text style={styles.duree}>{movie.duree}</Text>
+                    </>
+                  ) : (
+                    <Text>Loading...</Text>
+                  )}
+                </View>
               )}
-            </View>
-          )}
-          onSwipedRight={handleSwipeRight}
-          onSwipedLeft={handleSwipteLeft}
-          onSwipedAll={handleSipedAll}
-          cardIndex={currentIndex}
-          disableBottomSwipe //désactiver le swipe vers le bas
-          disableTopSwipe //désactiver le swipe vers le haut
-          animateOverlayLabelsOpacity //affichage en fondu du LIKE/DISLIKE
-          animateCardOpacity //Disparition en fondu de la card
-          overlayLabels={
-            {
-              left: {
-                title: 'DISLIKE',
-                style: {
-                  label: {
-                    backgroundColor: 'red',
-                    color: 'white',
-                    fontSize: 26
+              onSwipedRight={handleSwipeRight}
+              onSwipedLeft={handleSwipteLeft}
+              onSwipedAll={handleSipedAll}
+              cardIndex={currentIndex}
+              disableBottomSwipe //désactiver le swipe vers le bas
+              disableTopSwipe //désactiver le swipe vers le haut
+              animateOverlayLabelsOpacity //affichage en fondu du LIKE/DISLIKE
+              animateCardOpacity //Disparition en fondu de la card
+              overlayLabels={
+                {
+                  left: {
+                    title: 'DISLIKE',
+                    style: {
+                      label: {
+                        backgroundColor: 'red',
+                        color: 'white',
+                        fontSize: 26
+                      },
+                      wrapper: {
+                        flexDisrection: 'column',
+                        alignItems: 'flex-end',
+                        justifyContent: 'flex-start',
+                        marginTop: 20,
+                        marginLeft: -20
+                      }
+                    }
                   },
-                  wrapper: {
-                    flexDisrection: 'column',
-                    alignItems: 'flex-end',
-                    justifyContent: 'flex-start',
-                    marginTop: 20,
-                    marginLeft: -20
-                  }
-                }
-              },
-              right: {
-                title: 'LIKE',
-                style: {
-                  label: {
-                    backgroundColor: 'green',
-                    color: 'white',
-                    fontSize: 26
-                  },
-                  wrapper: {
-                    flexDisrection: 'column',
-                    alignItems: 'flex-start',
-                    justifyContent: 'flex-start',
-                    marginTop: 20,
-                    marginLeft: 20
+                  right: {
+                    title: 'LIKE',
+                    style: {
+                      label: {
+                        backgroundColor: 'green',
+                        color: 'white',
+                        fontSize: 26
+                      },
+                      wrapper: {
+                        flexDisrection: 'column',
+                        alignItems: 'flex-start',
+                        justifyContent: 'flex-start',
+                        marginTop: 20,
+                        marginLeft: 20
+                      }
+                    }
                   }
                 }
               }
-            }
-          }
-        />
+            />
+          </View>
+        </ImageBackground>
       </View>
     );
   }
@@ -182,6 +193,14 @@ export const SwipePage: FC<SwipePageProps> = observer(function SwipePage(
 
 // #region Styles
 const styles = StyleSheet.create({
+  // styles pour les cards du swipe
+  containerSwiper: {
+    // flex: 1,
+    // backgroundColor: '#fff',
+    // alignItems: 'center',
+    // justifyContent: 'center',
+    // marginTop: 50
+  },
   card: {
     flex: 0.80,
     shadowRadius: 8,
@@ -208,19 +227,24 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 5,
   },
-  vote_average: {
+  duree: {
     fontSize: 16,
     color: '#ff9900'
   },
-  container: {
+
+  // styles pour l'affichage du film suggéré
+  containerSuggestedMovie: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: 80
   },
   poster: {
-    width: 200,
-    height: 300,
+    width: 300,
+    height: 400,
     marginBottom: 10,
+    resizeMode: "contain",
+    borderRadius: 10,
   },
   title: {
     fontSize: 24,
@@ -234,6 +258,7 @@ const styles = StyleSheet.create({
   synopsis: {
     fontSize: 16,
     marginBottom: 5,
+    paddingLeft: 10
   },
   director: {
     fontSize: 16,
@@ -247,10 +272,17 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     marginTop: 10,
+    paddingLeft: 10
   },
-  actorItem: {
-    fontSize: 16,
-    marginLeft: 20, // Pour l'espacement par rapport à la liste des acteurs
+  // style pour le btn de rechargement 
+  reloadButton: {
+    position: 'absolute',
+    top: 10, // Ajustez cette valeur selon votre mise en page
+    right: 10, // Ajustez cette valeur selon votre mise en page
+    backgroundColor: 'red',
+    padding: 10,
+    borderRadius: 5,
+    marginTop: 20
   },
 });
 // #endregion
