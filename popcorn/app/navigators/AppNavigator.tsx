@@ -29,6 +29,7 @@ import {
   RegisterScreen,
   WelcomeScreen,
   loadingSignInScreen,
+  SwipePage,
 } from "../screens"
 import { DemoNavigator, TabParamList, } from "./MenuNavigator" // @demo remove-current-line
 import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
@@ -85,6 +86,7 @@ export type AppStackParamList = {
   }; // Ajoutez les paramètres ici
   Register: undefined 
   loadingSignInScreen: undefined 
+  Swipe: undefined
   Guest: undefined
   Demo: NavigatorScreenParams<TabParamList> // @demo remove-current-line
   // 🔥 Your screens go here
@@ -125,6 +127,7 @@ const AppStack = observer(function AppStack() {
           <Stack.Screen name="Friends" component={FriendsPage}  />
           <Stack.Screen name="FriendsProfilePage" component={FriendsProfilePage}  />
           <Stack.Screen name="Favoris" component={FavPage}  />
+          <Stack.Screen name="Swipe" component={SwipePage}  />
           <Stack.Screen name="Demo" component={DemoNavigator} />
           <Stack.Screen name="Login" component={LoginScreen}  />
           <Stack.Screen name="Profile" component={ProfilePage}  />
@@ -145,6 +148,7 @@ const AppStack = observer(function AppStack() {
           <Stack.Screen name="loadingSignInScreen" component={loadingSignInScreen} />
           <Stack.Screen name="Guest" component={WelcomeScreen} />
           <Stack.Screen name="Demo" component={LoginScreen} />
+          <Stack.Screen name="Swipe" component={SwipePage}  />
         </>
       )}
 

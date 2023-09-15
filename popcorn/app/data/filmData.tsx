@@ -1,8 +1,9 @@
-import { fetchMovieDetails, fetchMovies, fetchSerieDetails , fetchFilmMayLikeDetails} from "../utils/apiService";
+import { fetchMovieDetails, fetchMovies, fetchSerieDetails, fetchFilmMayLikeDetails, fetchMoviesForSwipe, suggestMovie } from "../utils/apiService";
 
 const popularMoviesEndpoint = 'movie/popular';
 const popularSeriesEndpoint = 'tv/popular';
 const filmMayLikeEndpoint = 'movie/top_rated';
+const discoverMovieEndPoint = 'discover/movie';
 export const FilmILike = []; // Tableau pour stocker les films préférés
 export const SeriesILike = []; // Tableau pour stocker les séries préférées
 
@@ -22,7 +23,7 @@ const getMoviesData = async () => {
           duree: `${movieDetails.runtime} min`,
           titre: movie.title,
           synopsis: movie.overview,
-          realisateur:  movieDetails.director || "Inconnu",
+          realisateur: movieDetails.director || "Inconnu",
           distributions: movieDetails.actors || "Inconnu",
         };
       })
@@ -44,7 +45,7 @@ const getSeriesData = async () => {
         const numberOfSeasons = `${serieDetails.number_of_seasons} saisons` || "Nombre de saisons inconnu"; // Vérifier si la propriété number_of_seasons existe
         return {
           affiche: { uri: `https://image.tmdb.org/t/p/w500${serie.poster_path}` },
-          genre:  genres[0] || "Inconnu",
+          genre: genres[0] || "Inconnu",
           annee: serie.first_air_date.substring(0, 4),
           duree: numberOfSeasons,
           titre: serie.name,
@@ -87,12 +88,64 @@ const getFilmMayLikeData = async () => {
   }
 };
 
+const getMoviesDataForSwipe = async () => {
+  try {
+    const moviesDataForSwipe = await fetchMoviesForSwipe(discoverMovieEndPoint);
+    const films = await Promise.all(
+      moviesDataForSwipe.map(async (movie: any) => {
+        const movieDetails = await fetchMovieDetails(movie.id);
+        const genres = movieDetails.genres.slice(0, 1).map((genre: any) => genre.name); // Récupérer le  premier genres du film
+        return {
+          affiche: { uri: `https://image.tmdb.org/t/p/w500${movie.poster_path}` },
+          titre: movie.title,
+          duree: `${movieDetails.runtime} min`,
+          synopsis: movie.overview,
+          genre: genres[0] || "Inconnu", //Genre principal du film
+          genresID: movie.genre_ids
+        }
+      })
+    );
+    return films
+  } catch (error) {
+    console.error('Erreur lors de la récupération des données de films :', error);
+    throw error;
+  }
+};
+
+const getSuggestedFilm = async (genreID: any) => {
+  try {
+    const suggestedFilmData = await suggestMovie(discoverMovieEndPoint, genreID);
+    const suggestedFilm = await Promise.all(
+      suggestedFilmData.map(async (movie: any) => {
+        const movieDetails = await fetchMovieDetails(movie.id);
+        const genres = movieDetails.genres.slice(0, 1).map((genre: any) => genre.name); // Récupérer le premier genre du film
+        return {
+          affiche: { uri: `https://image.tmdb.org/t/p/w500${movie.poster_path}` },
+          genre: genres[0] || "Inconnu",
+          annee: movie.release_date.substring(0, 4),
+          duree: `${movieDetails.runtime} min`,
+          titre: movie.title,
+          synopsis: movie.overview,
+          realisateur: movieDetails.director || "Inconnu",
+          distributions: movieDetails.actors || "Inconnu",
+        };
+      })
+    );
+    return suggestedFilm[0];
+  } catch (error) {
+    console.error('Erreur lors de la récupération des données de films :', error);
+    throw error;
+  }
+};
+
 
 
 export {
   getMoviesData,
   getSeriesData,
   getFilmMayLikeData,
+  getMoviesDataForSwipe,
+  getSuggestedFilm,
 };
 
 
