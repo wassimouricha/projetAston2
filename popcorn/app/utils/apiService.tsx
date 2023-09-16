@@ -131,7 +131,7 @@ export const fetchMoviesForSwipe = async (endpoint: string, params?: any) => {
       params: {
         api_key: apiKey,
         language: "fr-FR",
-        page: 1,
+        page: Math.floor(Math.random() * 20) + 1,
         ...params
       }
     });
